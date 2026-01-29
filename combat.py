@@ -191,6 +191,25 @@ def battle(player, boss, player_attacks):
         draw_victory()
         print(f"\n  {boss.name} has been defeated!")
         player.wins += 1
+        player.record_victory(boss.name)
+
+        # Award XP based on boss level
+        xp_gained = boss.level * 20
+        print(f"  💫 +{xp_gained} XP!")
+
+        leveled_up = player.gain_xp(xp_gained)
+        if leveled_up:
+            print()
+            print("  ╔══════════════════════════════╗")
+            print(f"  ║   🎉 LEVEL UP! Now Lv.{player.level}!    ║")
+            print(f"  ║   Max HP:     {player.max_hp}              ║")
+            print(f"  ║   Max Energy: {player.max_energy}              ║")
+            print(f"  ║   Max Sanity: {player.max_sanity}              ║")
+            print("  ╚══════════════════════════════╝")
+        else:
+            remaining = player.xp_to_next_level() - player.xp
+            print(f"  📊 XP: {player.xp}/{player.xp_to_next_level()} ({remaining} to next level)")
+
         return True
     else:
         draw_defeat()
