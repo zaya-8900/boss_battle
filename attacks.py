@@ -46,4 +46,20 @@ PLAYER_ATTACKS = [
         sanity_cost=-10,  # negative cost = restores sanity
         description="Heals 10 Sanity, low damage",
     ),
+    Attack(
+        name="Procrastinate",
+        power=0,
+        accuracy=100,
+        energy_cost=-30,  # restores 30 energy
+        sanity_cost=10,
+        description="Skip turn, +30 Energy, -10 Sanity",
+    ),
+    Attack(
+        name="All-Nighter",
+        power=80,
+        accuracy=60,
+        energy_cost=50,
+        sanity_cost=20,
+        description="Massive damage but drains everything",
+    ),
 ]

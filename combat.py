@@ -3,7 +3,17 @@
 import random
 import time
 
-from display import draw_box, draw_hp_bar, draw_victory, draw_defeat
+from display import (
+    draw_hp_bar,
+    draw_victory,
+    draw_defeat,
+    draw_boss_entrance,
+    draw_attack_hit,
+    draw_miss,
+    draw_level_up,
+    draw_reward_screen,
+    type_text,
+)
 
 
 def show_battle_status(player, boss):
@@ -60,10 +70,10 @@ def show_attack_menu(player_attacks, player):
                 return None
             return atk
         else:
-            print("  Invalid choice.")
+            print("  Invalid choice. Pick a number from the list.")
             return None
     except ValueError:
-        print("  Invalid choice.")
+        print("  Invalid choice. Pick a number from the list.")
         return None
 
 
@@ -93,6 +103,12 @@ def player_turn(player, boss, player_attacks):
         player.use_energy(atk.energy_cost)
         player.use_sanity(atk.sanity_cost)
 
+        # Procrastinate does no damage but restores resources
+        if atk.power == 0:
+            print(f"  You're... doing nothing. But you feel rested.")
+            time.sleep(0.5)
+            return None
+
         # Check accuracy
         hit_roll = random.randint(1, 100)
         if hit_roll <= atk.accuracy:
@@ -103,13 +119,16 @@ def player_turn(player, boss, player_attacks):
             # Critical hit (10% chance)
             if random.randint(1, 100) <= 10:
                 damage *= 2
-                print(f"  ★ CRITICAL HIT! ★")
-                time.sleep(0.3)
+                draw_attack_hit(damage, critical=True)
+            else:
+                draw_attack_hit(damage, critical=False)
 
+            time.sleep(0.3)
             boss.take_damage(damage)
             print(f"  {boss.name} takes {damage} damage!")
         else:
-            print(f"  MISS! {atk.description}")
+            draw_miss()
+            print(f"  {atk.description}")
 
         time.sleep(0.5)
         return None
@@ -119,22 +138,23 @@ def boss_turn(player, boss):
     """Handle the boss's turn."""
     atk = random.choice(boss.attacks)
     print(f"\n  {boss.name} uses {atk.name}!")
-    print(f"  \"{atk.description}\"")
-    time.sleep(0.5)
+    type_text(f"  \"{atk.description}\"", delay=0.02)
+    time.sleep(0.3)
 
     hit_roll = random.randint(1, 100)
     if hit_roll <= atk.accuracy:
         damage = atk.power + random.randint(-3, 3)
         damage = max(1, damage)
         player.take_damage(damage)
-        print(f"  You take {damage} damage!")
+        draw_attack_hit(damage)
 
         # Bosses also drain sanity
         sanity_drain = random.randint(2, 8)
         player.use_sanity(sanity_drain)
-        print(f"  Sanity decreased by {sanity_drain}...")
+        print(f"  Sanity -{sanity_drain}...")
     else:
-        print(f"  {boss.name} missed!")
+        draw_miss()
+        print(f"  You dodged it!")
 
     time.sleep(0.5)
 
@@ -145,11 +165,14 @@ def battle(player, boss, player_attacks):
     Returns:
         True if player wins, False if player loses.
     """
+    # Dramatic entrance
     print()
     print("=" * 50)
-    print(f"  ⚔️  {player.name}  VS  {boss.name} (Lv.{boss.level})  ⚔️")
+    draw_boss_entrance(boss.name)
+    print()
+    type_text(f"  ⚔️  {player.name}  VS  {boss.name} (Lv.{boss.level})  ⚔️", delay=0.04)
     print("=" * 50)
-    time.sleep(1)
+    time.sleep(0.5)
 
     turn = 1
 
@@ -174,9 +197,9 @@ def battle(player, boss, player_attacks):
         boss_turn(player, boss)
 
         # Check if player's sanity hits 0
-        if player.sanity <= 0:
+        if player.sanity <= 0 and player.is_alive():
             print("\n  😵 Your sanity reached 0!")
-            print("  You start questioning the meaning of everything...")
+            type_text("  You start questioning the meaning of everything...", delay=0.02)
             extra_damage = random.randint(10, 20)
             player.take_damage(extra_damage)
             print(f"  Existential crisis deals {extra_damage} damage!")
@@ -195,24 +218,16 @@ def battle(player, boss, player_attacks):
 
         # Award XP based on boss level
         xp_gained = boss.level * 20
-        print(f"  💫 +{xp_gained} XP!")
-
         leveled_up = player.gain_xp(xp_gained)
+
         if leveled_up:
-            print()
-            print("  ╔══════════════════════════════╗")
-            print(f"  ║   🎉 LEVEL UP! Now Lv.{player.level}!    ║")
-            print(f"  ║   Max HP:     {player.max_hp}              ║")
-            print(f"  ║   Max Energy: {player.max_energy}              ║")
-            print(f"  ║   Max Sanity: {player.max_sanity}              ║")
-            print("  ╚══════════════════════════════╝")
-        else:
-            remaining = player.xp_to_next_level() - player.xp
-            print(f"  📊 XP: {player.xp}/{player.xp_to_next_level()} ({remaining} to next level)")
+            draw_level_up(player)
+
+        draw_reward_screen(boss.name, xp_gained, player)
 
         return True
     else:
         draw_defeat()
-        print(f"\n  {boss.name} was too powerful...")
+        type_text(f"\n  {boss.name} was too powerful...", delay=0.03)
         player.losses += 1
         return False
