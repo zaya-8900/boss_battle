@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Battle - {{ boss.name }}{% endblock %}
+
+{% block content %}
+<div class="battle-header">
+    <span>TURN {{ turn }}</span>
+    <span>{{ player.name }} VS {{ boss.name }}</span>
+</div>
+
+<div class="battle-container">
+    <!-- Left Panel: Boss -->
+    <div class="panel boss-panel">
+        <h2>{{ boss.name }} <span class="level">Lv.{{ boss.level }}</span></h2>
+        <pre class="boss-art">{{ boss_art }}</pre>
+        <div class="stat-bar">
+            <label>HP</label>
+            <div class="bar-container hp-bar">
+                <div class="bar-fill" id="boss-hp-fill"
+                     style="width: {{ (boss.hp / boss.max_hp * 100)|round }}%"></div>
+            </div>
+            <span class="bar-text" id="boss-hp-text">{{ boss.hp }}/{{ boss.max_hp }}</span>
+        </div>
+    </div>
+
+    <!-- Right Panel: Player -->
+    <div class="panel player-panel">
+        <h2>{{ player.name }} <span class="level">Lv.{{ player.level }}</span></h2>
+
+        <div class="player-stats">
+            <div class="stat-bar">
+                <label>HP</label>
+                <div class="bar-container hp-bar">
+                    <div class="bar-fill" id="player-hp-fill"
+                         style="width: {{ (player.hp / player.max_hp * 100)|round }}%"></div>
+                </div>
+                <span class="bar-text" id="player-hp-text">{{ player.hp }}/{{ player.max_hp }}</span>
+            </div>
+            <div class="stat-bar">
+                <label>Energy</label>
+                <div class="bar-container energy-bar">
+                    <div class="bar-fill" id="player-energy-fill"
+                         style="width: {{ (player.energy / player.max_energy * 100)|round }}%"></div>
+                </div>
+                <span class="bar-text" id="player-energy-text">{{ player.energy }}/{{ player.max_energy }}</span>
+            </div>
+            <div class="stat-bar">
+                <label>Sanity</label>
+                <div class="bar-container sanity-bar">
+                    <div class="bar-fill" id="player-sanity-fill"
+                         style="width: {{ (player.sanity / player.max_sanity * 100)|round }}%"></div>
+                </div>
+                <span class="bar-text" id="player-sanity-text">{{ player.sanity }}/{{ player.max_sanity }}</span>
+            </div>
+        </div>
+
+        <div class="attack-grid">
+            {% for atk in attacks %}
+            <button class="attack-btn"
+                    data-index="{{ loop.index0 }}"
+                    data-energy-cost="{{ atk.energy_cost }}"
+                    data-sanity-cost="{{ atk.sanity_cost }}"
+                    {% if (atk.energy_cost > 0 and player.energy < atk.energy_cost) or
+                          (atk.sanity_cost > 0 and player.sanity < atk.sanity_cost) %}disabled{% endif %}>
+                <span class="atk-name">{{ atk.name }}</span>
+                <span class="atk-stats">Pwr:{{ atk.power }} Acc:{{ atk.accuracy }}%</span>
+                <span class="atk-cost">
+                    {% if atk.energy_cost > 0 %}-{{ atk.energy_cost }} Energy{% elif atk.energy_cost < 0 %}+{{ -atk.energy_cost }} Energy{% endif %}
+                    {% if atk.sanity_cost > 0 %}-{{ atk.sanity_cost }} Sanity{% elif atk.sanity_cost < 0 %}+{{ -atk.sanity_cost }} Sanity{% endif %}
+                    {% if atk.energy_cost == 0 and atk.sanity_cost == 0 %}Free{% endif %}
+                </span>
+                <span class="atk-desc">"{{ atk.description }}"</span>
+            </button>
+            {% endfor %}
+        </div>
+
+        <button class="run-btn" id="run-btn">Run Away</button>
+    </div>
+</div>
+
+<!-- Modal Overlay -->
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box" id="modal-box">
+        <div class="modal-events" id="modal-events"></div>
+        <button class="modal-btn" id="modal-btn">Continue</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='game.js') }}"></script>
+{% endblock %}

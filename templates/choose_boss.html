@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Choose Your Boss{% endblock %}
+
+{% block content %}
+<div class="menu-box">
+    <h2>CHOOSE YOUR OPPONENT</h2>
+    <div class="boss-list">
+        {% set prev_cat = namespace(val='') %}
+        {% for boss in bosses %}
+            {% if boss.level < 10 %}
+                {% set cat = 'EASY' %}
+            {% elif boss.level < 20 %}
+                {% set cat = 'MEDIUM' %}
+            {% elif boss.level < 30 %}
+                {% set cat = 'HARD' %}
+            {% else %}
+                {% set cat = 'SECRET' %}
+            {% endif %}
+
+            {% if cat != prev_cat.val %}
+                <h3 class="difficulty {{ cat|lower }}">{{ cat }}</h3>
+                {% set prev_cat.val = cat %}
+            {% endif %}
+
+            <form action="{{ url_for('battle_start') }}" method="post" class="boss-entry">
+                <input type="hidden" name="boss_index" value="{{ loop.index0 }}">
+                <button type="submit" class="boss-btn">
+                    <span class="boss-name">{{ boss.name }}</span>
+                    <span class="boss-info">Lv.{{ boss.level }} | HP: {{ boss.hp }}</span>
+                    {% if boss.name in player.bosses_defeated %}
+                        <span class="defeated-mark">DEFEATED</span>
+                    {% endif %}
+                </button>
+            </form>
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('index') }}" class="menu-btn back-btn">Back to Menu</a>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}How to Play{% endblock %}
+
+{% block content %}
+<div class="menu-box">
+    <h2>HOW TO PLAY</h2>
+    <div class="help-content">
+        <h3>GOAL</h3>
+        <p>Defeat all 6 bosses!</p>
+
+        <h3>BATTLE</h3>
+        <ul>
+            <li>Pick an attack each turn</li>
+            <li>Attacks cost Energy and/or Sanity</li>
+            <li>Boss attacks back each turn</li>
+            <li>If HP reaches 0, you lose</li>
+            <li>If Sanity reaches 0, you take extra damage</li>
+        </ul>
+
+        <h3>ATTACKS</h3>
+        <table class="help-table">
+            <tr>
+                <th>Attack</th>
+                <th>Power</th>
+                <th>Accuracy</th>
+                <th>Description</th>
+            </tr>
+            {% for atk in attacks %}
+            <tr>
+                <td>{{ atk.name }}</td>
+                <td>{{ atk.power }}</td>
+                <td>{{ atk.accuracy }}%</td>
+                <td>{{ atk.description }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h3>TIPS</h3>
+        <ul>
+            <li>Manage Energy and Sanity carefully!</li>
+            <li>Use Cry and Procrastinate to recover</li>
+            <li>Level up to increase your max stats</li>
+            <li>XP gained = Boss Level x 20</li>
+        </ul>
+    </div>
+    <a href="{{ url_for('index') }}" class="menu-btn back-btn">Back to Menu</a>
+</div>
+{% endblock %}

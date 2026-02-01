@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Victory Log{% endblock %}
+
+{% block content %}
+<div class="menu-box">
+    <h2>VICTORY LOG</h2>
+    <div class="victory-list">
+        {% for boss in all_bosses %}
+        <div class="victory-item {{ 'defeated' if boss.name in player.bosses_defeated else 'not-defeated' }}">
+            {% if boss.name in player.bosses_defeated %}
+                &#10003; {{ boss.name }} (Lv.{{ boss.level }})
+            {% else %}
+                &#10007; {{ boss.name }} (Lv.{{ boss.level }}) - NOT DEFEATED
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="progress-bar-section">
+        <p>Progress: {{ defeated_count }}/{{ total }} bosses defeated</p>
+        {% if all_defeated %}
+            <p class="champion">ALL BOSSES DEFEATED! YOU ARE THE CHAMPION!</p>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('index') }}" class="menu-btn back-btn">Back to Menu</a>
+</div>
+{% endblock %}

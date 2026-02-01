@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Character Stats{% endblock %}
+
+{% block content %}
+<div class="menu-box">
+    <h2>CHARACTER STATS</h2>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-label">Name</span>
+            <span class="stat-value">{{ player.name }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Level</span>
+            <span class="stat-value">{{ player.level }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">XP</span>
+            <span class="stat-value">
+                <div class="bar-container xp-bar">
+                    <div class="bar-fill"
+                         style="width: {{ (player.xp / player.xp_to_next_level() * 100)|round }}%"></div>
+                </div>
+                {{ player.xp }}/{{ player.xp_to_next_level() }}
+            </span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Max HP</span>
+            <span class="stat-value">{{ player.max_hp }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Max Energy</span>
+            <span class="stat-value">{{ player.max_energy }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Max Sanity</span>
+            <span class="stat-value">{{ player.max_sanity }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Victories</span>
+            <span class="stat-value">{{ player.wins }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Defeats</span>
+            <span class="stat-value">{{ player.losses }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Win Rate</span>
+            <span class="stat-value">{{ win_rate }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Bosses Defeated</span>
+            <span class="stat-value">{{ defeated_count }}/{{ total_bosses }}</span>
+        </div>
+    </div>
+    <a href="{{ url_for('index') }}" class="menu-btn back-btn">Back to Menu</a>
+</div>
+{% endblock %}

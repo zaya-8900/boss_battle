@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Boss Battle Simulator{% endblock %}
+
+{% block content %}
+{% if player %}
+<!-- Main Menu -->
+<div class="menu-box">
+    <h2>MAIN MENU</h2>
+    <div class="menu-buttons">
+        <form action="{{ url_for('battle_start') }}" method="post">
+            <button type="submit" class="menu-btn">Quick Battle (Random Boss)</button>
+        </form>
+        <a href="{{ url_for('choose_boss') }}" class="menu-btn">Choose Your Boss</a>
+        <a href="{{ url_for('stats') }}" class="menu-btn">View Character Stats</a>
+        <a href="{{ url_for('victory_log') }}" class="menu-btn">Victory Log</a>
+        <a href="{{ url_for('help_page') }}" class="menu-btn">How to Play</a>
+        <form action="{{ url_for('logout') }}" method="post">
+            <button type="submit" class="menu-btn exit-btn">Exit to Reality</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<!-- Landing / Name Entry -->
+<div class="landing-box">
+    <pre class="title-art">
+ ============================================
+ |                                          |
+ |   BOSS BATTLE SIMULATOR: LIFE EDITION   |
+ |                                          |
+ |            +===============+             |
+ |            |   _____       |             |
+ |            |  |     |      |             |
+ |            |  | x_x | FIGHT|             |
+ |            |  |_____| YOUR |             |
+ |            |        DEMONS |             |
+ |            +===============+             |
+ |                                          |
+ ============================================
+    </pre>
+    <form action="{{ url_for('start') }}" method="post" class="name-form">
+        <label for="name">Enter your name, brave student:</label>
+        <input type="text" id="name" name="name" placeholder="Student" maxlength="30" autofocus>
+        <button type="submit" class="start-btn">Begin Your Fate</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
