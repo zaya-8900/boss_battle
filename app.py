@@ -75,6 +75,7 @@ def boss_to_session(boss):
                 "power": a.power,
                 "accuracy": a.accuracy,
                 "description": a.description,
+                "status_effect": a.status_effect,
             }
             for a in boss.attacks
         ],
@@ -87,7 +88,8 @@ def boss_from_session():
     if not data:
         return None
     attacks = [
-        Attack(a["name"], a["power"], a["accuracy"], description=a["description"])
+        Attack(a["name"], a["power"], a["accuracy"], description=a["description"],
+               status_effect=a.get("status_effect"))
         for a in data["attacks"]
     ]
     boss = Boss(data["name"], data["level"], data["max_hp"], attacks)
@@ -155,6 +157,8 @@ def battle_start():
     boss_to_session(boss)
     session["turn"] = 1
     session["battle_active"] = True
+    session["player_effects"] = []
+    session["boss_effects"] = []
 
     return redirect(url_for("battle"))
 
@@ -178,6 +182,8 @@ def battle():
         boss_art=boss_art,
         attacks=PLAYER_ATTACKS,
         turn=session.get("turn", 1),
+        player_effects=session.get("player_effects", []),
+        boss_effects=session.get("boss_effects", []),
     )
 
 
@@ -197,9 +203,35 @@ def battle_action():
     result = None
     victory_data = None
 
-    # ── Run attempt ──────────────────────────────────────
+    player_effects = session.get("player_effects", [])
+    boss_effects = session.get("boss_effects", [])
 
-    if action_type == "run":
+    # ── Process status effects at start of turn ───────────
+    player_stunned = _process_effects_web(player, player_effects, player.name, events)
+    boss_stunned = _process_effects_web(boss, boss_effects, boss.name, events)
+
+    # Check if player died from effects
+    if not player.is_alive():
+        player.losses += 1
+        battle_over = True
+        result = "defeat"
+
+    if not battle_over and player_stunned and action_type != "run":
+        events.append({"type": "stun_skip", "text": "You're stunned! Turn skipped..."})
+        # Boss still attacks (if not stunned)
+        if not boss_stunned:
+            _boss_attacks(boss, player, events, player_effects)
+            _sanity_check(player, events)
+        else:
+            events.append({"type": "stun_skip", "text": f"{boss.name} is stunned! Turn skipped!"})
+
+        if not player.is_alive():
+            player.losses += 1
+            battle_over = True
+            result = "defeat"
+
+    # ── Run attempt ──────────────────────────────────────
+    elif not battle_over and action_type == "run":
         if random.randint(1, 100) <= 50:
             events.append({
                 "type": "run_success",
@@ -212,9 +244,11 @@ def battle_action():
                 "type": "run_fail",
                 "text": "You tried to run but tripped over your backpack!",
             })
-            # Boss still gets a turn
-            _boss_attacks(boss, player, events)
-            _sanity_check(player, events)
+            if not boss_stunned:
+                _boss_attacks(boss, player, events, player_effects)
+                _sanity_check(player, events)
+            else:
+                events.append({"type": "stun_skip", "text": f"{boss.name} is stunned! Turn skipped!"})
 
             if not player.is_alive():
                 player.losses += 1
@@ -222,15 +256,13 @@ def battle_action():
                 result = "defeat"
 
     # ── Player attack ────────────────────────────────────
-
-    elif action_type == "attack":
+    elif not battle_over and action_type == "attack":
         attack_index = data.get("attack_index", 0)
         if not (0 <= attack_index < len(PLAYER_ATTACKS)):
             return jsonify({"error": "Invalid attack"}), 400
 
         atk = PLAYER_ATTACKS[attack_index]
 
-        # Validate resources
         if atk.energy_cost > 0 and player.energy < atk.energy_cost:
             return jsonify({
                 "error": f"Not enough energy! Need {atk.energy_cost}, have {player.energy}",
@@ -240,7 +272,6 @@ def battle_action():
                 "error": f"Not enough sanity! Need {atk.sanity_cost}, have {player.sanity}",
             }), 400
 
-        # Apply costs
         player.use_energy(atk.energy_cost)
         player.use_sanity(atk.sanity_cost)
 
@@ -249,20 +280,17 @@ def battle_action():
             "text": f"You used {atk.name}!",
         })
 
-        # Procrastinate: zero-power skip turn
         if atk.power == 0:
             events.append({
                 "type": "skip",
                 "text": "You're... doing nothing. But you feel rested.",
             })
         else:
-            # Accuracy check
             hit_roll = random.randint(1, 100)
             if hit_roll <= atk.accuracy:
                 damage = atk.power + random.randint(-5, 5)
                 damage = max(1, damage)
 
-                # 10% critical hit
                 if random.randint(1, 100) <= 10:
                     damage *= 2
                     events.append({
@@ -276,13 +304,17 @@ def battle_action():
                     })
 
                 boss.take_damage(damage)
+
+                # Try to apply status effect to boss
+                effect_msg = _try_apply_effect_web(atk, boss_effects, boss.name)
+                if effect_msg:
+                    events.append({"type": "status_effect", "text": effect_msg})
             else:
                 events.append({
                     "type": "miss",
                     "text": f"MISS! {atk.description}",
                 })
 
-        # Check if boss is defeated
         if not boss.is_alive():
             xp_gained = boss.level * 20
             leveled_up = player.gain_xp(xp_gained)
@@ -300,9 +332,11 @@ def battle_action():
                 "max_sanity": player.max_sanity,
             }
         else:
-            # Boss turn
-            _boss_attacks(boss, player, events)
-            _sanity_check(player, events)
+            if not boss_stunned:
+                _boss_attacks(boss, player, events, player_effects)
+                _sanity_check(player, events)
+            else:
+                events.append({"type": "stun_skip", "text": f"{boss.name} is stunned! Turn skipped!"})
 
             if not player.is_alive():
                 player.losses += 1
@@ -313,7 +347,12 @@ def battle_action():
 
     if battle_over:
         session["battle_active"] = False
+        session["player_effects"] = []
+        session["boss_effects"] = []
         player.save()
+    else:
+        session["player_effects"] = player_effects
+        session["boss_effects"] = boss_effects
 
     player_to_session(player)
     boss_to_session(boss)
@@ -324,6 +363,8 @@ def battle_action():
         "battle_over": battle_over,
         "result": result,
         "victory_data": victory_data,
+        "player_effects": player_effects,
+        "boss_effects": boss_effects,
         "player": {
             "hp": player.hp,
             "max_hp": player.max_hp,
@@ -340,8 +381,55 @@ def battle_action():
     })
 
 
-def _boss_attacks(boss, player, events):
+def _try_apply_effect_web(atk, target_effects, target_name):
+    """Roll for a status effect. Returns a message or None."""
+    se = atk.status_effect
+    if not se:
+        return None
+    if random.randint(1, 100) > se["chance"]:
+        return None
+
+    for e in target_effects:
+        if e["name"] == se["name"]:
+            e["turns_left"] = se.get("turns", e["turns_left"])
+            return f"{target_name} is already {se['name']}ed — duration refreshed!"
+
+    effect = {"name": se["name"], "turns_left": se.get("turns", 1)}
+    if se["name"] == "poison":
+        effect["damage"] = se["damage"]
+    elif se["name"] == "weaken":
+        effect["reduction"] = se["reduction"]
+
+    target_effects.append(effect)
+    labels = {"poison": "POISONED", "stun": "STUNNED", "weaken": "WEAKENED"}
+    return f"{target_name} is {labels.get(se['name'], se['name'].upper())}!"
+
+
+def _process_effects_web(target, effects, target_name, events):
+    """Apply active effects at start of turn. Returns True if target is stunned."""
+    remaining = []
+    stunned = False
+    for e in effects:
+        if e["name"] == "poison":
+            target.take_damage(e["damage"])
+            events.append({"type": "effect_damage", "text": f"{target_name} takes {e['damage']} poison damage!"})
+        elif e["name"] == "stun":
+            stunned = True
+        e["turns_left"] -= 1
+        if e["turns_left"] > 0:
+            remaining.append(e)
+        else:
+            labels = {"poison": "Poison", "stun": "Stun", "weaken": "Weaken"}
+            events.append({"type": "effect_expire", "text": f"{labels.get(e['name'], e['name'])} wore off on {target_name}."})
+    effects.clear()
+    effects.extend(remaining)
+    return stunned
+
+
+def _boss_attacks(boss, player, events, player_effects=None):
     """Execute the boss's attack and append events."""
+    if player_effects is None:
+        player_effects = []
     boss_atk = random.choice(boss.attacks)
     events.append({
         "type": "boss_attack",
@@ -356,12 +444,25 @@ def _boss_attacks(boss, player, events):
     if hit_roll <= boss_atk.accuracy:
         damage = boss_atk.power + random.randint(-3, 3)
         damage = max(1, damage)
+
+        # Apply weaken: boss deals less damage when weakened
+        boss_effects = session.get("boss_effects", [])
+        for e in boss_effects:
+            if e["name"] == "weaken":
+                damage = int(damage * (1.0 - e.get("reduction", 0.3)))
+                break
+
         player.take_damage(damage)
         events.append({"type": "boss_hit", "text": f"-{damage} HP!"})
 
         sanity_drain = random.randint(2, 8)
         player.use_sanity(sanity_drain)
         events.append({"type": "sanity_drain", "text": f"Sanity -{sanity_drain}..."})
+
+        # Try to apply status effect to player
+        effect_msg = _try_apply_effect_web(boss_atk, player_effects, player.name)
+        if effect_msg:
+            events.append({"type": "status_effect", "text": effect_msg})
     else:
         events.append({"type": "boss_miss", "text": "You dodged it!"})
 

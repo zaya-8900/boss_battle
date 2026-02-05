@@ -16,14 +16,103 @@ from display import (
 )
 
 
-def show_battle_status(player, boss):
+# ── Status Effect Helpers ─────────────────────────────────────
+
+def try_apply_effect(atk, target_effects, target_name):
+    """Roll for a status effect from an attack. Returns a message or None."""
+    se = atk.status_effect
+    if not se:
+        return None
+
+    if random.randint(1, 100) > se["chance"]:
+        return None
+
+    # Don't stack the same effect — refresh duration instead
+    for e in target_effects:
+        if e["name"] == se["name"]:
+            e["turns_left"] = se.get("turns", e["turns_left"])
+            return f"{target_name} is already {se['name']}ed — duration refreshed!"
+
+    effect = {"name": se["name"], "turns_left": se.get("turns", 1)}
+    if se["name"] == "poison":
+        effect["damage"] = se["damage"]
+    elif se["name"] == "weaken":
+        effect["reduction"] = se["reduction"]
+
+    target_effects.append(effect)
+
+    labels = {"poison": "POISONED", "stun": "STUNNED", "weaken": "WEAKENED"}
+    return f"{target_name} is {labels.get(se['name'], se['name'].upper())}!"
+
+
+def process_effects(target, effects, target_name):
+    """Apply active effects at start of turn. Returns (messages, is_stunned)."""
+    messages = []
+    stunned = False
+    remaining = []
+
+    for e in effects:
+        if e["name"] == "poison":
+            target.take_damage(e["damage"])
+            messages.append(f"{target_name} takes {e['damage']} poison damage!")
+        elif e["name"] == "stun":
+            stunned = True
+            messages.append(f"{target_name} is stunned and can't act!")
+        # weaken is checked during damage calculation, not here
+
+        e["turns_left"] -= 1
+        if e["turns_left"] > 0:
+            remaining.append(e)
+        else:
+            labels = {"poison": "Poison", "stun": "Stun", "weaken": "Weaken"}
+            messages.append(f"{labels.get(e['name'], e['name'])} wore off on {target_name}.")
+
+    effects.clear()
+    effects.extend(remaining)
+    return messages, stunned
+
+
+def get_weaken_multiplier(effects):
+    """Return the damage multiplier from weaken effects (1.0 = normal)."""
+    for e in effects:
+        if e["name"] == "weaken":
+            return 1.0 - e["reduction"]
+    return 1.0
+
+
+def format_active_effects(effects):
+    """Return a display string of active effects."""
+    if not effects:
+        return ""
+    labels = {"poison": "PSN", "stun": "STN", "weaken": "WKN"}
+    parts = [f"{labels.get(e['name'], e['name'])}({e['turns_left']})" for e in effects]
+    return " ".join(parts)
+
+
+# ── Battle Display ────────────────────────────────────────────
+
+def show_battle_status(player, boss, player_effects=None, boss_effects=None):
     """Display current HP/stats for both player and boss."""
+    player_effects = player_effects or []
+    boss_effects = boss_effects or []
+
     print()
-    print(f"  ┌─── {boss.name} (Lv.{boss.level}) ───")
+    boss_eff_str = format_active_effects(boss_effects)
+    boss_line = f"  ┌─── {boss.name} (Lv.{boss.level})"
+    if boss_eff_str:
+        boss_line += f" [{boss_eff_str}]"
+    boss_line += " ───"
+    print(boss_line)
     print(f"  │ HP: {draw_hp_bar(boss.hp, boss.max_hp)}")
     print(f"  └{'─' * 40}")
+
     print()
-    print(f"  ┌─── {player.name} (Lv.{player.level}) ───")
+    player_eff_str = format_active_effects(player_effects)
+    player_line = f"  ┌─── {player.name} (Lv.{player.level})"
+    if player_eff_str:
+        player_line += f" [{player_eff_str}]"
+    player_line += " ───"
+    print(player_line)
     print(f"  │ HP:     {draw_hp_bar(player.hp, player.max_hp)}")
     print(f"  │ Energy: {draw_hp_bar(player.energy, player.max_energy)}")
     print(f"  │ Sanity: {draw_hp_bar(player.sanity, player.max_sanity)}")
@@ -77,8 +166,10 @@ def show_attack_menu(player_attacks, player):
         return None
 
 
-def player_turn(player, boss, player_attacks):
+def player_turn(player, boss, player_attacks, boss_effects=None):
     """Handle the player's turn. Returns 'run' if player flees, else None."""
+    boss_effects = boss_effects or []
+
     while True:
         result = show_attack_menu(player_attacks, player)
 
@@ -126,6 +217,11 @@ def player_turn(player, boss, player_attacks):
             time.sleep(0.3)
             boss.take_damage(damage)
             print(f"  {boss.name} takes {damage} damage!")
+
+            # Try to apply status effect
+            msg = try_apply_effect(atk, boss_effects, boss.name)
+            if msg:
+                print(f"  {msg}")
         else:
             draw_miss()
             print(f"  {atk.description}")
@@ -134,8 +230,11 @@ def player_turn(player, boss, player_attacks):
         return None
 
 
-def boss_turn(player, boss):
+def boss_turn(player, boss, player_effects=None, boss_effects=None):
     """Handle the boss's turn."""
+    player_effects = player_effects or []
+    boss_effects = boss_effects or []
+
     atk = random.choice(boss.attacks)
     print(f"\n  {boss.name} uses {atk.name}!")
     type_text(f"  \"{atk.description}\"", delay=0.02)
@@ -145,6 +244,10 @@ def boss_turn(player, boss):
     if hit_roll <= atk.accuracy:
         damage = atk.power + random.randint(-3, 3)
         damage = max(1, damage)
+
+        # Apply weaken from boss_effects (boss deals less when weakened)
+        damage = int(damage * get_weaken_multiplier(boss_effects))
+
         player.take_damage(damage)
         draw_attack_hit(damage)
 
@@ -152,6 +255,11 @@ def boss_turn(player, boss):
         sanity_drain = random.randint(2, 8)
         player.use_sanity(sanity_drain)
         print(f"  Sanity -{sanity_drain}...")
+
+        # Try to apply status effect to player
+        msg = try_apply_effect(atk, player_effects, player.name)
+        if msg:
+            print(f"  {msg}")
     else:
         draw_miss()
         print(f"  You dodged it!")
@@ -165,6 +273,9 @@ def battle(player, boss, player_attacks):
     Returns:
         True if player wins, False if player loses.
     """
+    player_effects = []  # effects on the player
+    boss_effects = []    # effects on the boss
+
     # Dramatic entrance
     print()
     print("=" * 50)
@@ -181,20 +292,38 @@ def battle(player, boss, player_attacks):
         print(f"  TURN {turn}")
         print(f"{'─' * 50}")
 
-        show_battle_status(player, boss)
+        # Process effects at start of turn
+        msgs, player_stunned = process_effects(player, player_effects, player.name)
+        for m in msgs:
+            print(f"  {m}")
 
-        # Player turn
-        result = player_turn(player, boss, player_attacks)
-        if result == "run":
-            print("\n  You fled the battle!")
-            return False
+        msgs, boss_stunned = process_effects(boss, boss_effects, boss.name)
+        for m in msgs:
+            print(f"  {m}")
+
+        if not player.is_alive():
+            break
+
+        show_battle_status(player, boss, player_effects, boss_effects)
+
+        # Player turn (skip if stunned)
+        if player_stunned:
+            print("\n  You're stunned! Turn skipped...")
+        else:
+            result = player_turn(player, boss, player_attacks, boss_effects)
+            if result == "run":
+                print("\n  You fled the battle!")
+                return False
 
         # Check if boss is defeated
         if not boss.is_alive():
             break
 
-        # Boss turn
-        boss_turn(player, boss)
+        # Boss turn (skip if stunned)
+        if boss_stunned:
+            print(f"\n  {boss.name} is stunned! Their turn is skipped!")
+        else:
+            boss_turn(player, boss, player_effects, boss_effects)
 
         # Check if player's sanity hits 0
         if player.sanity <= 0 and player.is_alive():

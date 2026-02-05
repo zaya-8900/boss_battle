@@ -62,6 +62,22 @@
         animateBar("player-energy-fill", "player-energy-text", p.energy, p.max_energy);
         animateBar("player-sanity-fill", "player-sanity-text", p.sanity, p.max_sanity);
         animateBar("boss-hp-fill", "boss-hp-text", b.hp, b.max_hp);
+
+        // Update status effect badges
+        updateEffectBadges("player-effects", data.player_effects || []);
+        updateEffectBadges("boss-effects", data.boss_effects || []);
+    }
+
+    function updateEffectBadges(containerId, effects) {
+        var container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+        effects.forEach(function (e) {
+            var span = document.createElement("span");
+            span.className = "effect-badge effect-" + e.name;
+            span.textContent = e.name.toUpperCase() + "(" + e.turns_left + ")";
+            container.appendChild(span);
+        });
     }
 
     function animateBar(fillId, textId, current, max) {
