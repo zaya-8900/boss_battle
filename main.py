@@ -4,7 +4,7 @@ from display import draw_box, draw_title_screen, draw_hp_bar
 from player import Player
 from bosses import get_all_bosses
 from attacks import PLAYER_ATTACKS
-from combat import battle
+from combat import battle, survival_battle
 
 
 def show_main_menu(player):
@@ -18,7 +18,8 @@ def show_main_menu(player):
             "[3] 🧙  View Character Stats",
             "[4] 🏆  Victory Log",
             "[5] ❓  How to Play",
-            "[6] 🚪  Exit to Reality",
+            "[6] 💀  Survival Mode",
+            "[7] 🚪  Exit to Reality",
             "",
             f"Player: {player.name}   Lv.{player.level}   "
             f"W:{player.wins} L:{player.losses}",
@@ -146,6 +147,16 @@ def view_victory_log(player):
     input("Press Enter to continue...")
 
 
+def survival_mode(player):
+    """Start survival mode — endless boss waves until defeat."""
+    bosses = get_all_bosses()
+    player.restore_for_battle()
+    waves, total_xp = survival_battle(player, bosses, PLAYER_ATTACKS)
+    player.save()
+    print("  💾 Progress saved!")
+    input("  Press Enter to continue...")
+
+
 def show_help():
     """Display how to play instructions."""
     draw_box(
@@ -212,6 +223,8 @@ def main():
         elif choice == "5":
             show_help()
         elif choice == "6":
+            survival_mode(player)
+        elif choice == "7":
             player.save()
             print("\n  💾 Progress saved!")
             print("  You escaped back to reality... for now. 👋\n")
