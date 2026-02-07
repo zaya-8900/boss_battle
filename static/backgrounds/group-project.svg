@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#280505"/>
+      <stop offset="100%" stop-color="#140202"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
+      <stop offset="27%" stop-color="black" stop-opacity="0"/>
+      <stop offset="100%" stop-color="black" stop-opacity="0.83"/>
+    </radialGradient>
+    <filter id="blur-sm"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blur-md"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="blur-lg"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Scene elements -->
+  <ellipse cx="400" cy="300" rx="200" ry="150" fill="#a02020" opacity="0.06" filter="url(#blur-lg)"/>
+  <path d="M400,300 L323,289 L269,283 L222,273 L190,242 L106,224 L37,199" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+  <path d="M400,300 L474,327 L526,319 L609,298" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+  <path d="M400,300 L486,256 L543,227 L601,200 L678,169" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+  <path d="M400,300 L376,378 L378,472 L353,528 L365,627" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+  <path d="M400,300 L400,240 L396,198 L379,125" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+  <path d="M400,300 L461,285 L524,324 L588,298 L684,308 L760,288 L803,290" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+  <path d="M400,300 L303,324 L230,280 L147,306 L84,279" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+  <path d="M400,300 L465,268 L501,233 L506,186 L511,136" fill="none" stroke="#d03030" stroke-width="2" opacity="0.06" filter="url(#blur-sm)"/>
+
+  <!-- Vignette overlay -->
+  <rect width="800" height="600" fill="url(#vignette)"/>
+</svg>

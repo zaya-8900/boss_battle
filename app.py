@@ -478,6 +478,227 @@ def _sanity_check(player, events):
         })
 
 
+@app.route("/survival/start", methods=["POST"])
+def survival_start():
+    """Start survival mode — wave 1."""
+    player = player_from_session()
+    if not player:
+        return redirect(url_for("index"))
+
+    bosses = get_all_bosses()
+    template = random.choice(bosses)
+
+    wave = 1
+    scaled_hp = int(template.max_hp * (1 + 0.15 * wave))
+    boss = Boss(template.name, template.level, scaled_hp, template.attacks)
+
+    player.restore_for_battle()
+    player_to_session(player)
+    boss_to_session(boss)
+    session["turn"] = 1
+    session["battle_active"] = True
+    session["survival_mode"] = True
+    session["survival_wave"] = wave
+    session["survival_xp"] = 0
+
+    return redirect(url_for("survival"))
+
+
+@app.route("/survival")
+def survival():
+    """Render the survival battle page (reuses battle.html)."""
+    player = player_from_session()
+    boss = boss_from_session()
+
+    if not player or not boss or not session.get("battle_active"):
+        return redirect(url_for("index"))
+
+    boss_art_lines = BOSS_ART.get(boss.name, BOSS_ART["default"])
+    boss_art = "\n".join(boss_art_lines)
+
+    return render_template(
+        "battle.html",
+        player=player,
+        boss=boss,
+        boss_art=boss_art,
+        attacks=PLAYER_ATTACKS,
+        turn=session.get("turn", 1),
+        survival_mode=True,
+        survival_wave=session.get("survival_wave", 1),
+    )
+
+
+@app.route("/survival/action", methods=["POST"])
+def survival_action():
+    """Process one survival combat turn. Returns JSON."""
+    player = player_from_session()
+    boss = boss_from_session()
+
+    if not player or not boss:
+        return jsonify({"error": "No active battle"}), 400
+
+    data = request.get_json()
+    action_type = data.get("action_type", "")
+    events = []
+    battle_over = False
+    result = None
+    victory_data = None
+
+    wave = session.get("survival_wave", 1)
+    total_xp = session.get("survival_xp", 0)
+
+    # No running in survival
+    if action_type == "run":
+        events.append({
+            "type": "run_fail",
+            "text": "No running in survival mode! Stand and fight!",
+        })
+        _boss_attacks(boss, player, events)
+        _sanity_check(player, events)
+
+        if not player.is_alive():
+            player.losses += 1
+            battle_over = True
+            result = "defeat"
+            victory_data = {
+                "survival_wave": wave - 1,
+                "survival_xp": total_xp,
+            }
+
+    elif action_type == "attack":
+        attack_index = data.get("attack_index", 0)
+        if not (0 <= attack_index < len(PLAYER_ATTACKS)):
+            return jsonify({"error": "Invalid attack"}), 400
+
+        atk = PLAYER_ATTACKS[attack_index]
+
+        if atk.energy_cost > 0 and player.energy < atk.energy_cost:
+            return jsonify({
+                "error": f"Not enough energy! Need {atk.energy_cost}, have {player.energy}",
+            }), 400
+        if atk.sanity_cost > 0 and player.sanity < atk.sanity_cost:
+            return jsonify({
+                "error": f"Not enough sanity! Need {atk.sanity_cost}, have {player.sanity}",
+            }), 400
+
+        player.use_energy(atk.energy_cost)
+        player.use_sanity(atk.sanity_cost)
+
+        events.append({
+            "type": "player_attack",
+            "text": f"You used {atk.name}!",
+        })
+
+        if atk.power == 0:
+            events.append({
+                "type": "skip",
+                "text": "You're... doing nothing. But you feel rested.",
+            })
+        else:
+            hit_roll = random.randint(1, 100)
+            if hit_roll <= atk.accuracy:
+                damage = atk.power + random.randint(-5, 5)
+                damage = max(1, damage)
+
+                if random.randint(1, 100) <= 10:
+                    damage *= 2
+                    events.append({
+                        "type": "critical",
+                        "text": f"CRITICAL HIT! {damage} damage!",
+                    })
+                else:
+                    events.append({
+                        "type": "hit",
+                        "text": f"{damage} damage!",
+                    })
+
+                boss.take_damage(damage)
+            else:
+                events.append({
+                    "type": "miss",
+                    "text": f"MISS! {atk.description}",
+                })
+
+        # Boss defeated — advance wave
+        if not boss.is_alive():
+            xp_gained = boss.level * 20
+            total_xp += xp_gained
+            player.gain_xp(xp_gained)
+            player.record_victory(boss.name)
+            player.wins += 1
+
+            # Partial recovery
+            player.heal(30)
+            player.use_energy(-20)
+            player.use_sanity(-20)
+
+            events.append({
+                "type": "survival_wave_clear",
+                "text": f"Wave {wave} cleared! +{xp_gained} XP | +30 HP, +20 Energy, +20 Sanity",
+            })
+
+            # Spawn next wave boss
+            wave += 1
+            bosses = get_all_bosses()
+            template = random.choice(bosses)
+            scaled_hp = int(template.max_hp * (1 + 0.15 * wave))
+            new_boss = Boss(template.name, template.level, scaled_hp, template.attacks)
+            boss = new_boss
+
+            events.append({
+                "type": "survival_next_wave",
+                "text": f"Wave {wave}: {boss.name} (HP: {boss.hp}) approaches!",
+            })
+
+            session["survival_wave"] = wave
+            session["survival_xp"] = total_xp
+        else:
+            _boss_attacks(boss, player, events)
+            _sanity_check(player, events)
+
+            if not player.is_alive():
+                player.losses += 1
+                battle_over = True
+                result = "defeat"
+                victory_data = {
+                    "survival_wave": wave - 1,
+                    "survival_xp": total_xp,
+                }
+
+    if battle_over:
+        session["battle_active"] = False
+        session["survival_mode"] = False
+        player.save()
+
+    player_to_session(player)
+    boss_to_session(boss)
+    session["turn"] = session.get("turn", 1) + 1
+
+    return jsonify({
+        "events": events,
+        "battle_over": battle_over,
+        "result": result,
+        "victory_data": victory_data,
+        "survival_mode": True,
+        "survival_wave": session.get("survival_wave", 1),
+        "player": {
+            "hp": player.hp,
+            "max_hp": player.max_hp,
+            "energy": player.energy,
+            "max_energy": player.max_energy,
+            "sanity": player.sanity,
+            "max_sanity": player.max_sanity,
+        },
+        "boss": {
+            "hp": boss.hp,
+            "max_hp": boss.max_hp,
+            "name": boss.name,
+            "level": boss.level,
+        },
+        "turn": session.get("turn", 1),
+    })
+
+
 @app.route("/stats")
 def stats():
     """Player stats page."""

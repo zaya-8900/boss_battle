@@ -5,6 +5,9 @@
 <div class="battle-header">
     <span>TURN {{ turn }}</span>
     <span>{{ player.name }} VS {{ boss.name }}</span>
+    {% if survival_mode %}
+    <span class="survival-wave-badge">WAVE {{ survival_wave }}</span>
+    {% endif %}
 </div>
 
 <div class="battle-container">

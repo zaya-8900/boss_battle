@@ -119,7 +119,7 @@ def show_battle_status(player, boss, player_effects=None, boss_effects=None):
     print(f"  └{'─' * 40}")
 
 
-def show_attack_menu(player_attacks, player):
+def show_attack_menu(player_attacks, player, allow_run=True):
     """Display attack options and return chosen attack or None."""
     print()
     print("  ╔═══ CHOOSE YOUR ATTACK ═══╗")
@@ -138,13 +138,20 @@ def show_attack_menu(player_attacks, player):
         print(f"  ║     Pwr:{atk.power}  Acc:{atk.accuracy}%{cost_info}")
         print(f"  ║     \"{atk.description}\"")
     print(f"  ║")
-    print(f"  ║ [R] 🏃 Run Away")
+    if allow_run:
+        print(f"  ║ [R] 🏃 Run Away")
+    else:
+        print(f"  ║ [R] 🚫 No running in survival!")
     print(f"  ╚{'═' * 28}╝")
 
     choice = input("  What will you do? ").strip().lower()
 
     if choice == "r":
-        return "run"
+        if allow_run:
+            return "run"
+        else:
+            print("\n  No running in survival mode! Stand and fight!")
+            return None
 
     try:
         idx = int(choice) - 1
@@ -166,12 +173,12 @@ def show_attack_menu(player_attacks, player):
         return None
 
 
-def player_turn(player, boss, player_attacks, boss_effects=None):
+def player_turn(player, boss, player_attacks, allow_run=True, boss_effects=None):
     """Handle the player's turn. Returns 'run' if player flees, else None."""
     boss_effects = boss_effects or []
 
     while True:
-        result = show_attack_menu(player_attacks, player)
+        result = show_attack_menu(player_attacks, player, allow_run=allow_run)
 
         if result == "run":
             chance = random.randint(1, 100)
@@ -360,3 +367,100 @@ def battle(player, boss, player_attacks):
         type_text(f"\n  {boss.name} was too powerful...", delay=0.03)
         player.losses += 1
         return False
+
+
+def survival_battle(player, all_bosses, player_attacks):
+    """Run an endless survival mode — fight random bosses with scaling HP.
+
+    Player gets only partial recovery between waves.
+    Returns (waves_survived, total_xp).
+    """
+    from bosses import Boss
+
+    wave = 0
+    total_xp = 0
+
+    player.restore_for_battle()
+
+    print()
+    print("=" * 50)
+    type_text("  ⚔️  SURVIVAL MODE ⚔️", delay=0.04)
+    type_text("  Fight boss after boss until you fall!", delay=0.02)
+    print("=" * 50)
+    time.sleep(0.5)
+
+    while player.is_alive():
+        wave += 1
+        template = random.choice(all_bosses)
+
+        # Scale boss HP: base_hp * (1 + 0.15 * wave)
+        scaled_hp = int(template.max_hp * (1 + 0.15 * wave))
+        boss = Boss(
+            template.name,
+            template.level,
+            scaled_hp,
+            list(template.attacks),
+        )
+
+        print(f"\n{'=' * 50}")
+        print(f"  WAVE {wave}")
+        print(f"{'=' * 50}")
+        draw_boss_entrance(boss.name)
+        type_text(f"  ⚔️  {boss.name} (Lv.{boss.level}) — HP: {boss.hp}  ⚔️", delay=0.03)
+        time.sleep(0.3)
+
+        turn = 1
+        while player.is_alive() and boss.is_alive():
+            print(f"\n{'─' * 50}")
+            print(f"  WAVE {wave} — TURN {turn}")
+            print(f"{'─' * 50}")
+
+            show_battle_status(player, boss)
+
+            result = player_turn(player, boss, player_attacks, allow_run=False)
+            # No running in survival
+
+            if not boss.is_alive():
+                break
+
+            boss_turn(player, boss)
+
+            if player.sanity <= 0 and player.is_alive():
+                print("\n  😵 Your sanity reached 0!")
+                extra_damage = random.randint(10, 20)
+                player.take_damage(extra_damage)
+                print(f"  Existential crisis deals {extra_damage} damage!")
+
+            turn += 1
+
+        if not player.is_alive():
+            break
+
+        # Boss defeated — partial recovery
+        xp_gained = boss.level * 20
+        total_xp += xp_gained
+        player.gain_xp(xp_gained)
+        player.record_victory(boss.name)
+
+        print()
+        draw_victory()
+        print(f"  Wave {wave} cleared! +{xp_gained} XP")
+
+        # Partial heal between waves
+        player.heal(30)
+        player.use_energy(-20)  # restores 20
+        player.use_sanity(-20)  # restores 20
+        print(f"  Partial recovery: +30 HP, +20 Energy, +20 Sanity")
+        time.sleep(0.5)
+
+    # Survival over
+    print()
+    print("=" * 50)
+    draw_defeat()
+    print(f"\n  SURVIVAL OVER!")
+    print(f"  Waves survived: {wave - 1}")
+    print(f"  Total XP earned: {total_xp}")
+    print(f"={'=' * 49}")
+
+    player.losses += 1
+    return wave - 1, total_xp

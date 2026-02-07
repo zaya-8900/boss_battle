@@ -1,0 +1,437 @@
+[
+  {
+    "id": "forward_head",
+    "name": "Forward Head Posture",
+    "category": "head_neck",
+    "description": "The head sits 1+ inches forward of the shoulder line, placing excessive load on the cervical spine.",
+    "how_it_forms": [
+      "Prolonged screen/phone use with head tilted forward",
+      "Desk work without ergonomic setup",
+      "Weak deep neck flexor muscles from disuse",
+      "Carrying heavy backpacks",
+      "Sleeping with too many pillows or on your stomach"
+    ],
+    "side_effects": {
+      "short_term": ["Neck stiffness", "Tension headaches", "Jaw tension", "Eye strain"],
+      "long_term": ["Cervical disc degeneration", "Chronic migraines", "TMJ disorder", "Nerve compression", "Reduced lung capacity"]
+    },
+    "why_fix": "Every inch your head sits forward adds approximately 10 lbs of effective weight on your cervical spine. At 3 inches forward, your neck muscles are supporting 42 lbs instead of 12. This accelerates disc wear, compresses nerves exiting the cervical spine, and forces compensatory curves throughout the rest of the spine.",
+    "biomechanics_explanation": "The cervical extensors (suboccipitals, upper traps, splenius) become chronically shortened to hold the head up against gravity. The deep neck flexors (longus colli, longus capitis) weaken from disuse. The upper cervical spine hyperextends while the lower cervical spine flexes, creating a shear force at C4-C5 and C5-C6.",
+    "tight_muscles": ["Suboccipitals", "Upper trapezius", "Sternocleidomastoid", "Levator scapulae", "Pectoralis minor"],
+    "weak_muscles": ["Deep neck flexors (longus colli)", "Lower trapezius", "Serratus anterior"],
+    "connected_dysfunctions": ["rounded_shoulders", "thoracic_kyphosis", "elevated_shoulders"],
+    "caused_by_dysfunctions": [],
+    "chain_reaction": "Forward head \u2192 rounds the upper back to compensate \u2192 shoulders roll forward \u2192 pecs shorten \u2192 mid-back weakens \u2192 thoracic kyphosis develops \u2192 ribcage compresses \u2192 breathing becomes shallow \u2192 anterior pelvic tilt may develop to rebalance center of gravity",
+    "severity_indicators": {
+      "mild": "Head slightly forward, occasional neck stiffness after prolonged sitting",
+      "moderate": "Visible forward shift, regular headaches, neck pain after desk work",
+      "severe": "Pronounced forward shift, chronic pain, numbness/tingling in arms, TMJ issues"
+    }
+  },
+  {
+    "id": "rounded_shoulders",
+    "name": "Rounded Shoulders",
+    "category": "shoulders_upper_back",
+    "description": "The shoulders roll forward and internally rotate, causing the chest to collapse inward and the upper back to round.",
+    "how_it_forms": [
+      "Excessive time hunched over a desk or phone",
+      "Overtraining chest muscles (bench press) while neglecting back",
+      "Carrying bags on one shoulder repeatedly",
+      "Poor awareness of shoulder position during daily activities",
+      "Emotional posture — chronic stress or low confidence"
+    ],
+    "side_effects": {
+      "short_term": ["Shoulder ache", "Upper back tension", "Reduced shoulder mobility", "Shallow breathing"],
+      "long_term": ["Shoulder impingement syndrome", "Rotator cuff tears", "Thoracic outlet syndrome", "Chronic upper back pain", "Reduced respiratory capacity"]
+    },
+    "why_fix": "Rounded shoulders compress the subacromial space — the gap where your rotator cuff tendons pass through. Every time you raise your arm overhead, those tendons get pinched. Over years, this leads to fraying, inflammation, and eventually tears. Your lungs also can't fully expand when your ribcage is collapsed forward, reducing oxygen intake by up to 30%.",
+    "biomechanics_explanation": "The pectoralis major and minor shorten, pulling the humeral head forward. The serratus anterior and lower trapezius weaken, losing their ability to retract and stabilize the scapula. The rotator cuff muscles (especially infraspinatus and teres minor) become lengthened and weak, reducing their ability to externally rotate the humerus.",
+    "tight_muscles": ["Pectoralis major", "Pectoralis minor", "Anterior deltoid", "Subscapularis", "Upper trapezius", "Latissimus dorsi"],
+    "weak_muscles": ["Rhomboids", "Middle trapezius", "Lower trapezius", "Infraspinatus", "Teres minor", "Serratus anterior"],
+    "connected_dysfunctions": ["forward_head", "thoracic_kyphosis", "winged_scapula"],
+    "caused_by_dysfunctions": ["forward_head", "thoracic_kyphosis"],
+    "chain_reaction": "Rounded shoulders \u2192 scapulae protract and tilt \u2192 thoracic spine flexes to accommodate \u2192 ribcage compresses \u2192 diaphragm restricted \u2192 compensatory breathing with neck muscles \u2192 neck tension increases \u2192 forward head posture worsens",
+    "severity_indicators": {
+      "mild": "Shoulders slightly forward, correctable with conscious effort",
+      "moderate": "Visible rounding, difficulty holding shoulders back, discomfort when reaching overhead",
+      "severe": "Pronounced rounding, chronic shoulder/upper back pain, shoulder impingement symptoms"
+    }
+  },
+  {
+    "id": "thoracic_kyphosis",
+    "name": "Thoracic Kyphosis",
+    "category": "shoulders_upper_back",
+    "description": "Excessive rounding of the upper back (thoracic spine), creating a hunched or stooped appearance that goes beyond the normal thoracic curve.",
+    "how_it_forms": [
+      "Years of slouched sitting posture",
+      "Osteoporosis causing vertebral compression fractures",
+      "Scheuermann's disease (developmental condition)",
+      "Weak thoracic extensors from sedentary lifestyle",
+      "Prolonged forward-leaning work positions"
+    ],
+    "side_effects": {
+      "short_term": ["Mid-back stiffness", "Fatigue in upper back muscles", "Difficulty standing up straight", "Shallow breathing"],
+      "long_term": ["Spinal compression fractures", "Chronic back pain", "Digestive issues from compressed abdomen", "Reduced lung capacity", "Balance problems in elderly"]
+    },
+    "why_fix": "The thoracic spine is designed to have a gentle curve of 20-45 degrees. When this exceeds 50 degrees, the vertebral bodies begin bearing load unevenly — more on the front than the back. This accelerates disc degeneration, increases fracture risk, and forces every other spinal region to compensate. Your lungs lose up to 30% expansion capacity, and your digestive organs get compressed.",
+    "biomechanics_explanation": "The thoracic erector spinae and deep multifidus muscles become lengthened and weak. The anterior longitudinal ligament shortens. The pectorals and abdominal fascia tighten, pulling the ribcage down and forward. The thoracic vertebrae begin to wedge anteriorly over time, making the curve structural rather than just postural.",
+    "tight_muscles": ["Pectoralis major", "Pectoralis minor", "Rectus abdominis (upper)", "Internal obliques", "Anterior intercostals"],
+    "weak_muscles": ["Thoracic erector spinae", "Rhomboids", "Middle trapezius", "Lower trapezius", "Deep thoracic multifidus"],
+    "connected_dysfunctions": ["forward_head", "rounded_shoulders", "lumbar_hyperlordosis"],
+    "caused_by_dysfunctions": ["forward_head", "rounded_shoulders"],
+    "chain_reaction": "Thoracic kyphosis \u2192 head moves forward to keep eyes level \u2192 shoulders round to follow the curve \u2192 ribcage compresses \u2192 diaphragm restricted \u2192 lumbar spine hyperextends to compensate \u2192 anterior pelvic tilt develops \u2192 hip flexors tighten",
+    "severity_indicators": {
+      "mild": "Slight upper back rounding, easily correctable with effort",
+      "moderate": "Noticeable hunch, difficulty fully straightening, mid-back ache",
+      "severe": "Pronounced hump, structural changes visible, chronic pain, breathing difficulty"
+    }
+  },
+  {
+    "id": "elevated_shoulders",
+    "name": "Elevated Shoulders",
+    "category": "head_neck",
+    "description": "One or both shoulders sit higher than normal, often hiked up toward the ears due to chronic tension in the upper trapezius and levator scapulae.",
+    "how_it_forms": [
+      "Chronic stress causing unconscious shoulder hiking",
+      "Desk work with arms too high or keyboard too elevated",
+      "Carrying bags on one shoulder habitually",
+      "Breathing dysfunction — using neck muscles instead of diaphragm",
+      "Emotional guarding patterns from anxiety"
+    ],
+    "side_effects": {
+      "short_term": ["Neck tension", "Shoulder tightness", "Reduced neck range of motion", "Tension headaches"],
+      "long_term": ["Chronic neck pain", "Thoracic outlet syndrome", "Cervicogenic headaches", "Upper trapezius trigger points", "Restricted shoulder mobility"]
+    },
+    "why_fix": "Chronically elevated shoulders compress the thoracic outlet — the space between your collarbone and first rib where major nerves and blood vessels pass to your arms. This compression can cause numbness, tingling, and weakness in the hands. The constant muscle contraction also wastes energy and creates painful trigger points that refer pain to the head, face, and arms.",
+    "biomechanics_explanation": "The upper trapezius and levator scapulae become chronically shortened and overactive, elevating the scapula. The lower trapezius, which should depress and stabilize the scapula, becomes inhibited. The diaphragm may be underactive, causing accessory breathing muscles (scalenes, SCM) to take over, which further elevates the shoulder girdle.",
+    "tight_muscles": ["Upper trapezius", "Levator scapulae", "Scalenes", "Sternocleidomastoid"],
+    "weak_muscles": ["Lower trapezius", "Serratus anterior (lower fibers)", "Diaphragm"],
+    "connected_dysfunctions": ["forward_head", "rounded_shoulders", "head_tilt"],
+    "caused_by_dysfunctions": ["forward_head"],
+    "chain_reaction": "Elevated shoulders \u2192 upper traps overwork \u2192 lower traps shut down \u2192 scapulae become unstable \u2192 shoulder mechanics alter \u2192 impingement risk increases \u2192 neck muscles overwork to stabilize \u2192 cervicogenic headaches develop",
+    "severity_indicators": {
+      "mild": "Slight shoulder elevation, noticeable when pointed out, relaxes easily",
+      "moderate": "Visible shoulder hiking, frequent tension, difficulty relaxing shoulders down",
+      "severe": "Chronic elevation, constant pain, trigger points, numbness in arms"
+    }
+  },
+  {
+    "id": "winged_scapula",
+    "name": "Winged Scapula",
+    "category": "shoulders_upper_back",
+    "description": "The shoulder blade protrudes outward from the rib cage instead of lying flat, visible as a 'wing' shape on the back, especially during pushing movements.",
+    "how_it_forms": [
+      "Weakness of the serratus anterior muscle",
+      "Long thoracic nerve damage or impingement",
+      "Overuse injuries from repetitive overhead activities",
+      "Poor push-up and pressing form over long periods",
+      "General deconditioning and sedentary lifestyle"
+    ],
+    "side_effects": {
+      "short_term": ["Shoulder blade discomfort", "Difficulty with pushing movements", "Clicking or snapping sounds", "Reduced overhead reach"],
+      "long_term": ["Shoulder impingement", "Rotator cuff dysfunction", "Chronic shoulder instability", "Brachial plexus irritation", "Reduced athletic performance"]
+    },
+    "why_fix": "The scapula is the foundation for all arm movements. When it wings, the glenoid fossa (shoulder socket) doesn't position correctly, meaning every reach, push, pull, and lift happens on an unstable platform. This is like trying to shoot a cannon from a canoe — the force can't transfer properly, and surrounding structures take the abuse instead.",
+    "biomechanics_explanation": "The serratus anterior is the primary scapular stabilizer that holds the medial border of the scapula flush against the rib cage. When it weakens, the scapula loses its anchor. The pectoralis minor then has an unopposed pull, tilting the scapula anteriorly. The lower trapezius also fails to upwardly rotate the scapula during arm elevation, leading to subacromial impingement.",
+    "tight_muscles": ["Pectoralis minor", "Rhomboids (paradoxically tight but weak)", "Levator scapulae"],
+    "weak_muscles": ["Serratus anterior", "Lower trapezius", "Middle trapezius"],
+    "connected_dysfunctions": ["rounded_shoulders", "thoracic_kyphosis", "elevated_shoulders"],
+    "caused_by_dysfunctions": ["rounded_shoulders"],
+    "chain_reaction": "Winged scapula \u2192 scapula can't upwardly rotate \u2192 shoulder impingement during overhead movement \u2192 rotator cuff compensates \u2192 rotator cuff fatigue/injury \u2192 pain limits movement \u2192 further weakening \u2192 chronic instability",
+    "severity_indicators": {
+      "mild": "Slight scapular prominence, only visible during wall push-ups or loaded movements",
+      "moderate": "Visible winging at rest, difficulty with push-ups, clicking sensations",
+      "severe": "Pronounced winging, significant weakness, pain with overhead movements, possible nerve involvement"
+    }
+  },
+  {
+    "id": "head_tilt",
+    "name": "Head Tilt",
+    "category": "head_neck",
+    "description": "The head chronically tilts to one side, creating uneven loading on the cervical spine and asymmetric muscle tension patterns.",
+    "how_it_forms": [
+      "Habitual phone cradling between ear and shoulder",
+      "Unilateral vision or hearing dominance compensation",
+      "Torticollis (congenital or acquired)",
+      "Scoliosis creating compensatory head positioning",
+      "Always sleeping on one side with poor pillow support"
+    ],
+    "side_effects": {
+      "short_term": ["Unilateral neck pain", "Asymmetric headaches", "Jaw misalignment", "Eye strain"],
+      "long_term": ["Cervical facet joint degeneration (one-sided)", "TMJ disorder", "Chronic unilateral migraines", "Scalene syndrome", "Cervical nerve root compression"]
+    },
+    "why_fix": "A tilted head creates asymmetric loading on the cervical vertebrae. The facet joints on the shortened side get compressed while the opposite side gets stretched. Over years, this uneven wear degenerates the joints unevenly, can compress nerve roots on one side, and forces the entire spine to develop compensatory curves to keep the eyes level.",
+    "biomechanics_explanation": "The scalenes, upper trapezius, and SCM on the shortened side become chronically contracted. The opposite side becomes lengthened and weak. The suboccipital muscles adapt asymmetrically, altering proprioceptive input from the upper cervical spine, which can affect balance and spatial orientation. The jaw may shift to compensate, loading the TMJ unevenly.",
+    "tight_muscles": ["Scalenes (ipsilateral)", "Upper trapezius (ipsilateral)", "SCM (ipsilateral)", "Levator scapulae (ipsilateral)"],
+    "weak_muscles": ["Deep neck flexors", "Scalenes (contralateral)", "Upper trapezius (contralateral)", "Lower trapezius (contralateral)"],
+    "connected_dysfunctions": ["elevated_shoulders", "forward_head", "lateral_pelvic_tilt"],
+    "caused_by_dysfunctions": ["lateral_pelvic_tilt", "elevated_shoulders"],
+    "chain_reaction": "Head tilt \u2192 cervical spine side-bends \u2192 shoulder elevates on short side \u2192 thoracic spine compensates with opposite curve \u2192 lumbar spine adds another compensatory curve \u2192 pelvis tilts laterally \u2192 full-body asymmetric pattern",
+    "severity_indicators": {
+      "mild": "Slight head tilt, only noticeable in photos, easily self-corrected",
+      "moderate": "Visible tilt, unilateral neck tension, occasional headaches on one side",
+      "severe": "Pronounced tilt, chronic one-sided pain, TMJ symptoms, difficulty centering head"
+    }
+  },
+  {
+    "id": "anterior_pelvic_tilt",
+    "name": "Anterior Pelvic Tilt",
+    "category": "lower_back_pelvis",
+    "description": "The pelvis tilts forward, causing the lower back to arch excessively and the belly to protrude, even in lean individuals.",
+    "how_it_forms": [
+      "Prolonged sitting tightening the hip flexors",
+      "Weak gluteal muscles from disuse (sitting all day)",
+      "Weak abdominal muscles failing to stabilize the pelvis",
+      "High heels tilting the pelvis forward",
+      "Overtraining hip flexors without stretching (cycling, running)"
+    ],
+    "side_effects": {
+      "short_term": ["Lower back ache", "Hip flexor tightness", "Protruding belly appearance", "Hamstring tension"],
+      "long_term": ["Lumbar disc herniation", "Facet joint syndrome", "SI joint dysfunction", "Chronic lower back pain", "Hip labral tears"]
+    },
+    "why_fix": "An anterior pelvic tilt of just 10 degrees beyond neutral increases compressive load on the lumbar facet joints by up to 40%. The lumbar discs also bear load unevenly — more on the posterior side — which accelerates disc bulging and herniation. Your glutes, the strongest muscles in the body, essentially turn off, forcing smaller muscles to do heavy lifting.",
+    "biomechanics_explanation": "The iliopsoas and rectus femoris shorten, pulling the front of the pelvis down. The erector spinae in the lumbar region shorten to maintain the excessive lordotic curve. The gluteus maximus and abdominals lengthen and become inhibited — this is called 'lower cross syndrome.' The hamstrings are pulled taut across the tilted pelvis, making them feel tight even though they're actually lengthened.",
+    "tight_muscles": ["Iliopsoas", "Rectus femoris", "Tensor fasciae latae", "Lumbar erector spinae", "Quadratus lumborum"],
+    "weak_muscles": ["Gluteus maximus", "Rectus abdominis", "Internal obliques", "External obliques", "Hamstrings"],
+    "connected_dysfunctions": ["lumbar_hyperlordosis", "thoracic_kyphosis", "knee_valgus"],
+    "caused_by_dysfunctions": ["thoracic_kyphosis"],
+    "chain_reaction": "Anterior pelvic tilt \u2192 lumbar hyperextension \u2192 facet joint compression \u2192 glutes inhibited \u2192 hamstrings and lower back compensate \u2192 hamstring strains \u2192 knee stress increases \u2192 knee valgus may develop under load",
+    "severity_indicators": {
+      "mild": "Slight forward tilt, lower back tightness after standing long periods",
+      "moderate": "Visible arch in lower back, noticeable belly protrusion, regular lower back pain",
+      "severe": "Pronounced tilt, chronic lower back pain, difficulty activating glutes, hip flexor pain"
+    }
+  },
+  {
+    "id": "posterior_pelvic_tilt",
+    "name": "Posterior Pelvic Tilt",
+    "category": "lower_back_pelvis",
+    "description": "The pelvis tucks under, flattening the natural lumbar curve. The tailbone tucks forward and the lower back loses its lordotic arch.",
+    "how_it_forms": [
+      "Prolonged slouched sitting with weight on the tailbone",
+      "Overactive hamstrings pulling the pelvis under",
+      "Weak hip flexors from excessive stretching or disuse",
+      "Chronic abdominal bracing or 'sucking in' habits",
+      "Tight gluteus maximus from excessive targeted training"
+    ],
+    "side_effects": {
+      "short_term": ["Flat-back appearance", "Difficulty standing upright", "Reduced hip mobility", "Discomfort when sitting upright"],
+      "long_term": ["Lumbar disc herniation (posterior)", "Degenerative disc disease", "SI joint dysfunction", "Hamstring tendinopathy", "Reduced shock absorption in spine"]
+    },
+    "why_fix": "The lumbar lordosis exists for a reason — it's a shock absorber. When you flatten it, axial loads (gravity, walking, running) transfer directly through the disc bodies instead of being distributed across the curve. This dramatically increases intradiscal pressure, especially at L4-L5 and L5-S1, which are already the most vulnerable levels.",
+    "biomechanics_explanation": "The hamstrings and gluteus maximus become shortened, pulling the ischial tuberosities (sit bones) under the pelvis. The abdominals may be overactive, pulling the front of the pelvis up. The hip flexors (iliopsoas) become lengthened and weak. The lumbar erector spinae lose their activation pattern, and the lumbar multifidus atrophies, removing critical spinal stability.",
+    "tight_muscles": ["Hamstrings", "Gluteus maximus", "Rectus abdominis", "External obliques"],
+    "weak_muscles": ["Iliopsoas", "Rectus femoris", "Lumbar erector spinae", "Lumbar multifidus"],
+    "connected_dysfunctions": ["thoracic_kyphosis", "sway_back", "flat_feet"],
+    "caused_by_dysfunctions": ["sway_back"],
+    "chain_reaction": "Posterior pelvic tilt \u2192 lumbar curve flattens \u2192 thoracic spine rounds more to compensate \u2192 head moves forward \u2192 reduced shock absorption in spine \u2192 increased disc pressure \u2192 disc degeneration at L4-L5, L5-S1",
+    "severity_indicators": {
+      "mild": "Slightly flat lower back, mild discomfort when trying to arch",
+      "moderate": "Noticeably flat back, difficulty maintaining lumbar curve when sitting, regular stiffness",
+      "severe": "Completely flat lumbar spine, chronic lower back pain, disc-related symptoms"
+    }
+  },
+  {
+    "id": "lateral_pelvic_tilt",
+    "name": "Lateral Pelvic Tilt",
+    "category": "lower_back_pelvis",
+    "description": "One hip sits higher than the other when standing, creating an asymmetric base that forces the entire spine to compensate with side-bending curves.",
+    "how_it_forms": [
+      "Habitual standing with weight on one leg",
+      "Leg length discrepancy (true or functional)",
+      "Unilateral hip muscle weakness (gluteus medius)",
+      "Scoliosis creating pelvic asymmetry",
+      "Hip joint dysfunction or past injury on one side"
+    ],
+    "side_effects": {
+      "short_term": ["Uneven hips visible in mirror", "One-sided lower back pain", "IT band tightness on one side", "Gait asymmetry"],
+      "long_term": ["SI joint dysfunction", "Lumbar scoliosis development", "Unilateral hip osteoarthritis", "Piriformis syndrome", "Chronic IT band syndrome"]
+    },
+    "why_fix": "The pelvis is the foundation of the spine. When it tilts laterally, the lumbar spine must create an S-curve to keep your head over your center of gravity. This puts asymmetric loads on every disc, facet joint, and muscle from pelvis to skull. The hip on the high side gets compressed, while the low side gets stretched — both accelerating wear patterns that can lead to premature arthritis.",
+    "biomechanics_explanation": "On the elevated side, the quadratus lumborum and hip adductors become shortened. The gluteus medius on the opposite (dropped) side is weak, failing to stabilize the pelvis during single-leg stance. The tensor fasciae latae and IT band on the high side become tight. The lumbar spine develops a compensatory curve, and the thoracic spine adds another curve above it.",
+    "tight_muscles": ["Quadratus lumborum (elevated side)", "Hip adductors (elevated side)", "TFL/IT band (elevated side)", "Piriformis (low side)"],
+    "weak_muscles": ["Gluteus medius (low side)", "Gluteus minimus (low side)", "Core obliques (both sides)", "Hip adductors (low side)"],
+    "connected_dysfunctions": ["head_tilt", "knee_valgus", "flat_feet"],
+    "caused_by_dysfunctions": [],
+    "chain_reaction": "Lateral pelvic tilt \u2192 lumbar spine side-bends to compensate \u2192 thoracic spine bends opposite way \u2192 cervical spine tilts to level the eyes \u2192 uneven loading on hip joints \u2192 knee tracks inward on low side \u2192 foot overpronates on low side \u2192 full-body asymmetric pattern",
+    "severity_indicators": {
+      "mild": "Slight pelvic unevenness, visible only with careful observation",
+      "moderate": "Noticeable hip height difference, one-sided pain patterns, gait visible unevenness",
+      "severe": "Pronounced tilt, chronic asymmetric pain, compensatory scoliosis, difficulty with balance"
+    }
+  },
+  {
+    "id": "lumbar_hyperlordosis",
+    "name": "Lumbar Hyperlordosis",
+    "category": "lower_back_pelvis",
+    "description": "An exaggerated inward curve of the lower back, going beyond the normal 40-60 degrees of lumbar lordosis, creating excessive compression on the posterior spinal structures.",
+    "how_it_forms": [
+      "Anterior pelvic tilt pulling the lumbar spine into extension",
+      "Weak core muscles failing to control spinal position",
+      "Pregnancy or significant abdominal weight",
+      "Dancers and gymnasts overtraining extension",
+      "Wearing high heels regularly shifting center of gravity"
+    ],
+    "side_effects": {
+      "short_term": ["Lower back pain after standing", "Stiffness in the morning", "Difficulty bending forward comfortably", "Muscle spasms in lower back"],
+      "long_term": ["Spondylolisthesis (vertebral slippage)", "Facet joint arthritis", "Spinal stenosis", "Chronic sciatica", "Disc degeneration"]
+    },
+    "why_fix": "Hyperlordosis crushes the facet joints together at the back of each vertebra. These joints aren't designed to bear heavy loads — they're guidance rails. When forced to become load-bearing, they develop arthritis rapidly. The spinal canal also narrows in extension, potentially compressing the spinal cord and nerve roots. This is one of the most common causes of chronic lower back pain in adults under 50.",
+    "biomechanics_explanation": "The lumbar erector spinae become chronically shortened, holding the spine in extension. The iliopsoas maintains a forward pull on the lumbar vertebrae (especially L1-L3). The abdominals are lengthened and cannot generate sufficient intra-abdominal pressure to stabilize the spine. The posterior annulus of the lumbar discs gets compressed while the anterior annulus is stretched.",
+    "tight_muscles": ["Lumbar erector spinae", "Iliopsoas", "Rectus femoris", "Quadratus lumborum", "Latissimus dorsi"],
+    "weak_muscles": ["Rectus abdominis", "Transverse abdominis", "Internal obliques", "Gluteus maximus", "Hamstrings"],
+    "connected_dysfunctions": ["anterior_pelvic_tilt", "thoracic_kyphosis", "sway_back"],
+    "caused_by_dysfunctions": ["anterior_pelvic_tilt"],
+    "chain_reaction": "Lumbar hyperlordosis \u2192 facet joints overload \u2192 nerve roots compressed \u2192 compensatory thoracic kyphosis develops above \u2192 glutes inhibited below \u2192 hamstrings and lower back compensate for hip extension \u2192 hamstring strains and lower back spasms",
+    "severity_indicators": {
+      "mild": "Slightly exaggerated lumbar curve, occasional lower back stiffness",
+      "moderate": "Noticeable excessive arch, regular lower back pain, difficulty flattening back against wall",
+      "severe": "Pronounced lordosis, chronic pain, radiating symptoms, difficulty with daily activities"
+    }
+  },
+  {
+    "id": "sway_back",
+    "name": "Sway Back Posture",
+    "category": "lower_back_pelvis",
+    "description": "The hips push forward past the line of gravity while the upper body leans back, creating a characteristic 'lazy' S-curve where the person appears to be leaning back while standing.",
+    "how_it_forms": [
+      "Habitual lazy standing posture, leaning back on ligaments",
+      "Weak hip flexors and abdominals",
+      "Standing for long periods with locked knees",
+      "General deconditioning and poor body awareness",
+      "Teenage postural habits that persist into adulthood"
+    ],
+    "side_effects": {
+      "short_term": ["Generalized lower back discomfort", "Hip joint stiffness", "Fatigue when standing", "Hamstring tightness"],
+      "long_term": ["Lumbar disc degeneration", "Hip labral wear", "Ligamentous laxity in spine", "Chronic hamstring problems", "Premature joint degeneration"]
+    },
+    "why_fix": "Sway back posture means you're literally hanging on your ligaments instead of using muscles for support. Ligaments are not designed for sustained loading — they creep (slowly stretch) over time, leading to joint instability. The lumbar discs bear load in a shear pattern instead of pure compression, which they're poorly equipped to handle.",
+    "biomechanics_explanation": "The pelvis shifts anterior to the line of gravity while the thorax shifts posterior. The hip joint reaches end-range extension, and the person hangs on the iliofemoral ligament rather than using muscles. The external obliques and upper abdominals become shortened while the hip flexors become lengthened and weak. The hamstrings shorten to act as a posterior pelvic tilter.",
+    "tight_muscles": ["Hamstrings", "Upper abdominals", "External obliques", "Upper lumbar erector spinae"],
+    "weak_muscles": ["Iliopsoas", "Rectus femoris", "Internal obliques", "Lower abdominals", "Thoracic erector spinae"],
+    "connected_dysfunctions": ["posterior_pelvic_tilt", "thoracic_kyphosis", "genu_recurvatum"],
+    "caused_by_dysfunctions": [],
+    "chain_reaction": "Sway back \u2192 hips pushed forward \u2192 knees hyperextend to compensate \u2192 posterior pelvic tilt develops \u2192 thoracic spine rounds to keep balance \u2192 head pushes forward \u2192 full postural chain breakdown from bottom to top",
+    "severity_indicators": {
+      "mild": "Slight forward hip shift, barely noticeable lazy posture",
+      "moderate": "Visible hip forward position, upper body lean back, fatigue with standing",
+      "severe": "Pronounced sway, chronic lower back pain, ligamentous laxity, difficulty standing straight"
+    }
+  },
+  {
+    "id": "knee_valgus",
+    "name": "Knee Valgus (Knock Knees)",
+    "category": "knees_lower_body",
+    "description": "The knees collapse inward toward the midline, especially under load (squatting, walking stairs, running), creating excessive stress on the medial knee structures.",
+    "how_it_forms": [
+      "Weak gluteus medius failing to control femoral internal rotation",
+      "Flat feet/overpronation causing tibial internal rotation",
+      "Tight adductors pulling the knee inward",
+      "Poor neuromuscular control during dynamic movements",
+      "Wide pelvis with insufficient hip strength (common in females)"
+    ],
+    "side_effects": {
+      "short_term": ["Knee pain (medial side)", "Difficulty with squats and stairs", "Patellofemoral pain", "Ankle rolling inward"],
+      "long_term": ["ACL tears (2-8x higher risk)", "Meniscal tears", "Patellofemoral arthritis", "Medial knee osteoarthritis", "IT band syndrome"]
+    },
+    "why_fix": "Knee valgus is the number one predictor of ACL tears in athletes. When the knee collapses inward, the ACL is loaded in a way it was never designed to handle — combined valgus and rotation. Even without a traumatic tear, chronic valgus wears the medial meniscus and cartilage unevenly, setting up early-onset knee arthritis. The patella also tracks laterally, grinding into the femoral groove.",
+    "biomechanics_explanation": "The femur internally rotates and adducts relative to the pelvis due to weak gluteus medius and maximus. The tibia externally rotates relative to the femur. The knee experiences a combined valgus moment with rotation, loading the medial collateral ligament and ACL. The patella is pulled laterally by the altered Q-angle, creating patellofemoral compression.",
+    "tight_muscles": ["Hip adductors", "TFL/IT band", "Medial hamstrings", "Gastrocnemius (medial head)"],
+    "weak_muscles": ["Gluteus medius", "Gluteus maximus", "Vastus medialis oblique (VMO)", "Hip external rotators", "Tibialis posterior"],
+    "connected_dysfunctions": ["flat_feet", "anterior_pelvic_tilt", "lateral_pelvic_tilt"],
+    "caused_by_dysfunctions": ["flat_feet", "anterior_pelvic_tilt", "lateral_pelvic_tilt"],
+    "chain_reaction": "Knee valgus \u2192 foot overpronates to follow the knee \u2192 ankle stability decreases \u2192 medial knee overloaded \u2192 patella maltracking \u2192 anterior knee pain \u2192 compensatory movement patterns \u2192 hip and lower back stress",
+    "severity_indicators": {
+      "mild": "Slight inward knee movement during squats, no pain",
+      "moderate": "Visible knee collapse during daily activities, occasional knee pain, difficulty with single-leg balance",
+      "severe": "Pronounced valgus at rest, chronic knee pain, history of knee injuries, pain with stairs"
+    }
+  },
+  {
+    "id": "genu_recurvatum",
+    "name": "Genu Recurvatum (Hyperextended Knees)",
+    "category": "knees_lower_body",
+    "description": "The knees extend past neutral (0 degrees) into hyperextension, with the knee joint pushing backward past the straight-leg position.",
+    "how_it_forms": [
+      "Habitual locking of the knees while standing",
+      "Ligamentous laxity (naturally loose joints/hypermobility)",
+      "Weak quadriceps failing to control knee extension",
+      "Sway back posture pushing knees into extension",
+      "Dance or gymnastics training emphasizing straight legs"
+    ],
+    "side_effects": {
+      "short_term": ["Posterior knee pain", "Feeling of knee instability", "Fatigue when standing", "Calf tightness"],
+      "long_term": ["Posterior capsule stretching", "Cruciate ligament laxity", "Premature knee osteoarthritis", "Chronic knee instability", "Popliteal nerve compression"]
+    },
+    "why_fix": "When the knee hyperextends, you're hanging on the posterior capsule and cruciate ligaments instead of using muscle control. These passive structures slowly stretch over time, creating progressive instability. The articular cartilage at the front of the knee gets compressed abnormally, and the posterior blood vessels and nerves can get kinked, reducing circulation to the lower leg.",
+    "biomechanics_explanation": "The quadriceps and calf muscles create a combined extension moment that pushes the knee past neutral. The hamstrings, which should eccentrically control knee extension, are either weak or have poor timing. The posterior capsule of the knee stretches, allowing progressively more hyperextension. The soleus and gastrocnemius may be tight, contributing to the backward knee position.",
+    "tight_muscles": ["Quadriceps", "Gastrocnemius", "Soleus", "Popliteus (paradoxically tight)"],
+    "weak_muscles": ["Hamstrings", "Popliteus", "Gastrocnemius (in its knee-flexion role)"],
+    "connected_dysfunctions": ["sway_back", "anterior_pelvic_tilt", "flat_feet"],
+    "caused_by_dysfunctions": ["sway_back"],
+    "chain_reaction": "Genu recurvatum \u2192 posterior capsule stretches \u2192 knee becomes progressively unstable \u2192 quadriceps compensate by gripping harder \u2192 patellofemoral compression increases \u2192 anterior knee pain develops \u2192 gait alters to avoid pain \u2192 hip and ankle compensations emerge",
+    "severity_indicators": {
+      "mild": "Slight hyperextension when standing, knees lock back with inattention",
+      "moderate": "Noticeable backward knee bend, posterior knee ache, difficulty maintaining soft knees",
+      "severe": "Significant hyperextension (>10 degrees), chronic instability, pain, ligamentous laxity"
+    }
+  },
+  {
+    "id": "flat_feet",
+    "name": "Flat Feet / Overpronation",
+    "category": "knees_lower_body",
+    "description": "The medial arch of the foot collapses, causing the ankle to roll inward (pronate) excessively during standing and walking, which alters the entire lower limb alignment.",
+    "how_it_forms": [
+      "Wearing unsupportive shoes throughout development",
+      "Obesity or rapid weight gain overloading the arch",
+      "Posterior tibialis tendon weakness or dysfunction",
+      "Genetic predisposition to ligamentous laxity",
+      "Prolonged standing on hard surfaces without arch support"
+    ],
+    "side_effects": {
+      "short_term": ["Foot fatigue", "Arch pain (plantar fascia)", "Ankle soreness", "Shin splints"],
+      "long_term": ["Plantar fasciitis", "Posterior tibialis tendinopathy", "Bunions", "Knee pain (medial)", "Achilles tendinopathy"]
+    },
+    "why_fix": "Your foot is the first link in the kinetic chain. When the arch collapses, the tibia internally rotates, the knee follows into valgus, the hip internally rotates, and the pelvis tilts. A 5-degree increase in foot pronation can create a 10-degree change at the knee and 15-degree change at the hip. Every step you take (average 6,000-10,000 per day) reinforces this faulty pattern.",
+    "biomechanics_explanation": "The posterior tibialis is the primary dynamic arch supporter. When it weakens, the spring ligament and plantar fascia bear the arch load passively. The subtalar joint overpronates, causing the talus to slide medially and the calcaneus to evert. The tibial internal rotation that follows changes the mechanical axis of the entire leg, increasing valgus stress at the knee.",
+    "tight_muscles": ["Peroneals (fibularis longus/brevis)", "Lateral gastrocnemius", "Biceps femoris"],
+    "weak_muscles": ["Tibialis posterior", "Tibialis anterior", "Intrinsic foot muscles", "Gluteus medius", "Hip external rotators"],
+    "connected_dysfunctions": ["knee_valgus", "lateral_pelvic_tilt", "duck_feet"],
+    "caused_by_dysfunctions": [],
+    "chain_reaction": "Flat feet \u2192 ankle overpronates \u2192 tibia internally rotates \u2192 knee collapses into valgus \u2192 femur internally rotates \u2192 hip drops on opposite side \u2192 lateral pelvic tilt \u2192 lumbar spine compensates \u2192 problems travel up the entire chain",
+    "severity_indicators": {
+      "mild": "Slight arch reduction, mild pronation visible during walking, occasional foot fatigue",
+      "moderate": "Visible arch collapse when standing, shoes wear unevenly on inside, regular foot/ankle pain",
+      "severe": "Complete arch collapse, chronic pain, difficulty with prolonged standing, secondary knee/hip issues"
+    }
+  },
+  {
+    "id": "duck_feet",
+    "name": "Duck Feet (External Tibial Torsion)",
+    "category": "knees_lower_body",
+    "description": "The feet point outward (externally rotated) during standing and walking, instead of pointing straight ahead, creating inefficient gait mechanics and altered loading patterns.",
+    "how_it_forms": [
+      "Tight external hip rotators (piriformis, deep six)",
+      "Weak internal hip rotators and hip flexors",
+      "Flat feet causing compensatory foot external rotation",
+      "Habitual W-sitting in childhood",
+      "Sleeping on stomach with feet turned out"
+    ],
+    "side_effects": {
+      "short_term": ["Inefficient walking pattern", "Ankle instability", "Foot fatigue", "Medial knee stress"],
+      "long_term": ["Achilles tendinopathy", "Plantar fasciitis", "Knee osteoarthritis", "Hip labral wear", "Chronic ankle sprains"]
+    },
+    "why_fix": "When your feet point outward, each step pushes off from the inside of the big toe instead of straight ahead. This medial push-off overloads the plantar fascia, creates a valgus force at the knee, and reduces push-off power by up to 20%. You're essentially walking with your engine misaligned — every step wastes energy and creates abnormal joint loading.",
+    "biomechanics_explanation": "External tibial torsion and/or femoral retroversion positions the foot in external rotation. The deep external rotators of the hip (piriformis, gemelli, obturators) become shortened. The medial gastrocnemius and tibialis posterior become lengthened. During gait, the foot pushes off in abduction rather than straight-ahead plantarflexion, creating a medial whip pattern that stresses the Achilles and plantar fascia.",
+    "tight_muscles": ["Piriformis", "Deep external hip rotators", "Biceps femoris", "TFL (paradoxically)", "Lateral gastrocnemius"],
+    "weak_muscles": ["Hip internal rotators", "Tibialis posterior", "Medial gastrocnemius", "Adductors", "Gluteus medius (anterior fibers)"],
+    "connected_dysfunctions": ["flat_feet", "knee_valgus", "anterior_pelvic_tilt"],
+    "caused_by_dysfunctions": ["flat_feet"],
+    "chain_reaction": "Duck feet \u2192 push-off from medial foot \u2192 plantar fascia overloaded \u2192 ankle rolls inward on each step \u2192 tibial external rotation with knee valgus \u2192 hip compensates with more external rotation \u2192 pattern self-reinforces",
+    "severity_indicators": {
+      "mild": "Feet slightly turned out (10-15 degrees), no pain, barely noticeable",
+      "moderate": "Noticeable outward foot angle (15-30 degrees), shoe wear pattern visible, occasional pain",
+      "severe": "Significant outward rotation (>30 degrees), chronic foot/ankle problems, gait clearly affected"
+    }
+  }
+]
