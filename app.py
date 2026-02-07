@@ -69,6 +69,8 @@ def boss_to_session(boss):
         "level": boss.level,
         "hp": boss.hp,
         "max_hp": boss.max_hp,
+        "intro_quote": getattr(boss, "intro_quote", ""),
+        "defeat_quote": getattr(boss, "defeat_quote", ""),
         "attacks": [
             {
                 "name": a.name,
@@ -90,7 +92,9 @@ def boss_from_session():
         Attack(a["name"], a["power"], a["accuracy"], description=a["description"])
         for a in data["attacks"]
     ]
-    boss = Boss(data["name"], data["level"], data["max_hp"], attacks)
+    boss = Boss(data["name"], data["level"], data["max_hp"], attacks,
+                intro_quote=data.get("intro_quote", ""),
+                defeat_quote=data.get("defeat_quote", ""))
     boss.hp = data["hp"]
     return boss
 
@@ -295,6 +299,7 @@ def battle_action():
                 "leveled_up": leveled_up,
                 "new_level": player.level,
                 "boss_name": boss.name,
+                "defeat_quote": boss.defeat_quote,
                 "max_hp": player.max_hp,
                 "max_energy": player.max_energy,
                 "max_sanity": player.max_sanity,

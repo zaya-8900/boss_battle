@@ -11,6 +11,9 @@
     <!-- Left Panel: Boss -->
     <div class="panel boss-panel">
         <h2>{{ boss.name }} <span class="level">Lv.{{ boss.level }}</span></h2>
+        {% if boss.intro_quote and turn == 1 %}
+        <p class="boss-quote intro-quote">"{{ boss.intro_quote }}"</p>
+        {% endif %}
         <pre class="boss-art">{{ boss_art }}</pre>
         <div class="stat-bar">
             <label>HP</label>
