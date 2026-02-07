@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#180a2a"/>
+      <stop offset="100%" stop-color="#0c0518"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
+      <stop offset="35%" stop-color="black" stop-opacity="0"/>
+      <stop offset="100%" stop-color="black" stop-opacity="0.75"/>
+    </radialGradient>
+    <filter id="blur-sm"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blur-md"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="blur-lg"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Scene elements -->
+  <circle cx="400" cy="300" r="180" fill="#6a2a90" opacity="0.05" filter="url(#blur-lg)"/>
+  <circle cx="430" cy="300" r="12" fill="#4a1a6a" opacity="0.100" filter="url(#blur-sm)"/>
+  <circle cx="433" cy="311" r="12" fill="#4a1a6a" opacity="0.099" filter="url(#blur-sm)"/>
+  <circle cx="432" cy="324" r="12" fill="#4a1a6a" opacity="0.098" filter="url(#blur-sm)"/>
+  <circle cx="426" cy="336" r="12" fill="#4a1a6a" opacity="0.097" filter="url(#blur-sm)"/>
+  <circle cx="415" cy="348" r="11" fill="#4a1a6a" opacity="0.096" filter="url(#blur-sm)"/>
+  <circle cx="400" cy="355" r="11" fill="#4a1a6a" opacity="0.095" filter="url(#blur-sm)"/>
+  <circle cx="381" cy="357" r="11" fill="#4a1a6a" opacity="0.094" filter="url(#blur-sm)"/>
+  <circle cx="362" cy="353" r="11" fill="#4a1a6a" opacity="0.093" filter="url(#blur-sm)"/>
+  <circle cx="343" cy="341" r="11" fill="#4a1a6a" opacity="0.092" filter="url(#blur-sm)"/>
+  <circle cx="329" cy="323" r="11" fill="#4a1a6a" opacity="0.091" filter="url(#blur-sm)"/>
+  <circle cx="320" cy="300" r="10" fill="#4a1a6a" opacity="0.090" filter="url(#blur-sm)"/>
+  <circle cx="319" cy="274" r="10" fill="#4a1a6a" opacity="0.089" filter="url(#blur-sm)"/>
+  <circle cx="327" cy="247" r="10" fill="#4a1a6a" opacity="0.088" filter="url(#blur-sm)"/>
+  <circle cx="344" cy="223" r="10" fill="#4a1a6a" opacity="0.087" filter="url(#blur-sm)"/>
+  <circle cx="369" cy="205" r="10" fill="#4a1a6a" opacity="0.086" filter="url(#blur-sm)"/>
+  <circle cx="400" cy="195" r="10" fill="#4a1a6a" opacity="0.085" filter="url(#blur-sm)"/>
+  <circle cx="434" cy="195" r="10" fill="#4a1a6a" opacity="0.084" filter="url(#blur-sm)"/>
+  <circle cx="468" cy="207" r="9" fill="#4a1a6a" opacity="0.083" filter="url(#blur-sm)"/>
+  <circle cx="497" cy="229" r="9" fill="#4a1a6a" opacity="0.082" filter="url(#blur-sm)"/>
+  <circle cx="519" cy="261" r="9" fill="#4a1a6a" opacity="0.081" filter="url(#blur-sm)"/>
+  <circle cx="530" cy="300" r="9" fill="#4a1a6a" opacity="0.080" filter="url(#blur-sm)"/>
+  <circle cx="528" cy="342" r="9" fill="#4a1a6a" opacity="0.079" filter="url(#blur-sm)"/>
+  <circle cx="513" cy="382" r="9" fill="#4a1a6a" opacity="0.078" filter="url(#blur-sm)"/>
+  <circle cx="485" cy="417" r="9" fill="#4a1a6a" opacity="0.077" filter="url(#blur-sm)"/>
+  <circle cx="446" cy="443" r="8" fill="#4a1a6a" opacity="0.076" filter="url(#blur-sm)"/>
+  <circle cx="400" cy="455" r="8" fill="#4a1a6a" opacity="0.075" filter="url(#blur-sm)"/>
+  <circle cx="351" cy="452" r="8" fill="#4a1a6a" opacity="0.074" filter="url(#blur-sm)"/>
+  <circle cx="303" cy="433" r="8" fill="#4a1a6a" opacity="0.073" filter="url(#blur-sm)"/>
+  <circle cx="262" cy="400" r="8" fill="#4a1a6a" opacity="0.072" filter="url(#blur-sm)"/>
+  <circle cx="234" cy="354" r="8" fill="#4a1a6a" opacity="0.071" filter="url(#blur-sm)"/>
+  <circle cx="220" cy="300" r="8" fill="#4a1a6a" opacity="0.070" filter="url(#blur-sm)"/>
+  <circle cx="224" cy="243" r="7" fill="#4a1a6a" opacity="0.069" filter="url(#blur-sm)"/>
+  <circle cx="246" cy="188" r="7" fill="#4a1a6a" opacity="0.068" filter="url(#blur-sm)"/>
+  <circle cx="285" cy="142" r="7" fill="#4a1a6a" opacity="0.067" filter="url(#blur-sm)"/>
+  <circle cx="338" cy="110" r="7" fill="#4a1a6a" opacity="0.066" filter="url(#blur-sm)"/>
+  <circle cx="400" cy="95" r="7" fill="#4a1a6a" opacity="0.065" filter="url(#blur-sm)"/>
+  <circle cx="465" cy="100" r="7" fill="#4a1a6a" opacity="0.064" filter="url(#blur-sm)"/>
+  <circle cx="526" cy="126" r="6" fill="#4a1a6a" opacity="0.063" filter="url(#blur-sm)"/>
+  <circle cx="578" cy="171" r="6" fill="#4a1a6a" opacity="0.062" filter="url(#blur-sm)"/>
+  <circle cx="614" cy="230" r="6" fill="#4a1a6a" opacity="0.061" filter="url(#blur-sm)"/>
+  <circle cx="630" cy="300" r="6" fill="#4a1a6a" opacity="0.060" filter="url(#blur-sm)"/>
+  <circle cx="623" cy="373" r="6" fill="#4a1a6a" opacity="0.059" filter="url(#blur-sm)"/>
+  <circle cx="594" cy="441" r="6" fill="#4a1a6a" opacity="0.058" filter="url(#blur-sm)"/>
+  <circle cx="544" cy="498" r="6" fill="#4a1a6a" opacity="0.057" filter="url(#blur-sm)"/>
+  <circle cx="477" cy="538" r="5" fill="#4a1a6a" opacity="0.056" filter="url(#blur-sm)"/>
+  <circle cx="400" cy="555" r="5" fill="#4a1a6a" opacity="0.055" filter="url(#blur-sm)"/>
+  <circle cx="320" cy="547" r="5" fill="#4a1a6a" opacity="0.054" filter="url(#blur-sm)"/>
+  <circle cx="244" cy="514" r="5" fill="#4a1a6a" opacity="0.053" filter="url(#blur-sm)"/>
+  <circle cx="182" cy="459" r="5" fill="#4a1a6a" opacity="0.052" filter="url(#blur-sm)"/>
+  <circle cx="138" cy="385" r="5" fill="#4a1a6a" opacity="0.051" filter="url(#blur-sm)"/>
+  <circle cx="120" cy="300" r="4" fill="#4a1a6a" opacity="0.050" filter="url(#blur-sm)"/>
+  <circle cx="129" cy="212" r="4" fill="#4a1a6a" opacity="0.049" filter="url(#blur-sm)"/>
+  <circle cx="165" cy="130" r="4" fill="#4a1a6a" opacity="0.048" filter="url(#blur-sm)"/>
+  <circle cx="227" cy="61" r="4" fill="#4a1a6a" opacity="0.047" filter="url(#blur-sm)"/>
+  <circle cx="307" cy="15" r="4" fill="#4a1a6a" opacity="0.046" filter="url(#blur-sm)"/>
+  <circle cx="400" cy="-5" r="4" fill="#4a1a6a" opacity="0.045" filter="url(#blur-sm)"/>
+  <circle cx="496" cy="5" r="4" fill="#4a1a6a" opacity="0.044" filter="url(#blur-sm)"/>
+  <circle cx="585" cy="45" r="3" fill="#4a1a6a" opacity="0.043" filter="url(#blur-sm)"/>
+  <circle cx="659" cy="112" r="3" fill="#4a1a6a" opacity="0.042" filter="url(#blur-sm)"/>
+  <circle cx="709" cy="200" r="3" fill="#4a1a6a" opacity="0.041" filter="url(#blur-sm)"/>
+
+  <!-- Vignette overlay -->
+  <rect width="800" height="600" fill="url(#vignette)"/>
+</svg>

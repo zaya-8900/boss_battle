@@ -4,6 +4,11 @@
     var modalBtn = document.getElementById("modal-btn");
     var battleOver = false;
 
+    // Detect survival mode from the wave badge
+    var waveBadge = document.querySelector(".survival-wave-badge");
+    var isSurvival = !!waveBadge;
+    var actionUrl = isSurvival ? "/survival/action" : "/battle/action";
+
     // Attach click handlers to attack buttons
     document.querySelectorAll(".attack-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -27,7 +32,7 @@
     }
 
     function sendAction(payload) {
-        fetch("/battle/action", {
+        fetch(actionUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -62,6 +67,35 @@
         animateBar("player-energy-fill", "player-energy-text", p.energy, p.max_energy);
         animateBar("player-sanity-fill", "player-sanity-text", p.sanity, p.max_sanity);
         animateBar("boss-hp-fill", "boss-hp-text", b.hp, b.max_hp);
+
+        // Update boss name/level if changed (survival wave transition)
+        if (data.boss.name) {
+            var bossHeader = document.querySelector(".boss-panel h2");
+            if (bossHeader) {
+                bossHeader.innerHTML = data.boss.name + ' <span class="level">Lv.' + data.boss.level + '</span>';
+            }
+        }
+
+        // Update wave badge in survival mode
+        if (data.survival_mode && data.survival_wave && waveBadge) {
+            waveBadge.textContent = "WAVE " + data.survival_wave;
+        }
+
+        // Update status effect badges
+        updateEffectBadges("player-effects", data.player_effects || []);
+        updateEffectBadges("boss-effects", data.boss_effects || []);
+    }
+
+    function updateEffectBadges(containerId, effects) {
+        var container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+        effects.forEach(function (e) {
+            var span = document.createElement("span");
+            span.className = "effect-badge effect-" + e.name;
+            span.textContent = e.name.toUpperCase() + "(" + e.turns_left + ")";
+            container.appendChild(span);
+        });
     }
 
     function animateBar(fillId, textId, current, max) {
@@ -106,11 +140,17 @@
             } else if (data.result === "defeat") {
                 var defDiv = document.createElement("div");
                 defDiv.className = "event event-defeat";
-                defDiv.innerHTML =
-                    "<strong>DEFEATED</strong><br>R.I.P. Your G.P.A.";
+                if (data.victory_data && data.victory_data.survival_wave !== undefined) {
+                    defDiv.innerHTML =
+                        "<strong>SURVIVAL OVER</strong><br>" +
+                        "Waves survived: " + data.victory_data.survival_wave + "<br>" +
+                        "Total XP earned: " + data.victory_data.survival_xp;
+                } else {
+                    defDiv.innerHTML =
+                        "<strong>DEFEATED</strong><br>R.I.P. Your G.P.A.";
+                }
                 modalEvents.appendChild(defDiv);
             }
-            // run_success is already in events
 
             modalBtn.textContent = "Back to Menu";
         } else {

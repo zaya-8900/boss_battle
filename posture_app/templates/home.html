@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Posture Library — All Dysfunctions{% endblock %}
+{% block content %}
+<section class="hero">
+    <h1>Postural Dysfunction Library</h1>
+    <p class="hero-sub">15 common postural dysfunctions explained — what they are, why they happen, and what they do to your body.</p>
+</section>
+
+{% for cat in category_order %}
+{% if cat in grouped %}
+<section class="category-section">
+    <h2 class="category-heading">{{ category_labels[cat] }}</h2>
+    <div class="card-grid">
+        {% for d in grouped[cat] %}
+        <a href="{{ url_for('dysfunction_detail', dysfunction_id=d.id) }}" class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ d.name }}</h3>
+                <span class="severity-dots">
+                    <span class="dot dot-mild" title="Mild"></span>
+                    <span class="dot dot-moderate" title="Moderate"></span>
+                    <span class="dot dot-severe" title="Severe"></span>
+                </span>
+            </div>
+            <p class="card-desc">{{ d.description }}</p>
+            <span class="card-arrow">&rarr;</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#2a0404"/>
+      <stop offset="100%" stop-color="#120101"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
+      <stop offset="20%" stop-color="black" stop-opacity="0"/>
+      <stop offset="100%" stop-color="black" stop-opacity="0.91"/>
+    </radialGradient>
+    <filter id="blur-sm"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blur-md"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="blur-lg"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Scene elements -->
+  <ellipse cx="400" cy="300" rx="250" ry="180" fill="#cc1010" opacity="0.05" filter="url(#blur-lg)"/>
+  <polygon points="516,307 441,357 439,277" fill="#ff2020" opacity="0.08" filter="url(#blur-sm)"/>
+  <polygon points="367,85 318,70 365,42" fill="#ff2020" opacity="0.06" filter="url(#blur-sm)"/>
+  <polygon points="381,372 377,440 322,414" fill="#ff2020" opacity="0.05" filter="url(#blur-sm)"/>
+  <polygon points="424,463 412,509 368,462" fill="#ff2020" opacity="0.04" filter="url(#blur-sm)"/>
+  <polygon points="167,216 114,202 162,157" fill="#ff2020" opacity="0.09" filter="url(#blur-sm)"/>
+  <polygon points="419,62 489,92 423,138" fill="#ff2020" opacity="0.09" filter="url(#blur-sm)"/>
+  <polygon points="319,456 293,462 301,429" fill="#ff2020" opacity="0.07" filter="url(#blur-sm)"/>
+  <polygon points="469,457 443,518 385,463" fill="#ff2020" opacity="0.06" filter="url(#blur-sm)"/>
+  <polygon points="562,250 556,318 508,280" fill="#ff2020" opacity="0.08" filter="url(#blur-sm)"/>
+  <polygon points="69,153 64,178 44,166" fill="#ff2020" opacity="0.08" filter="url(#blur-sm)"/>
+  <polygon points="391,325 434,319 419,365" fill="#ff2020" opacity="0.04" filter="url(#blur-sm)"/>
+  <polygon points="662,400 689,413 672,434" fill="#ff2020" opacity="0.08" filter="url(#blur-sm)"/>
+  <polygon points="204,128 200,155 181,141" fill="#ff2020" opacity="0.07" filter="url(#blur-sm)"/>
+  <polygon points="45,302 27,259 78,249" fill="#ff2020" opacity="0.07" filter="url(#blur-sm)"/>
+  <polygon points="356,321 308,311 345,267" fill="#ff2020" opacity="0.09" filter="url(#blur-sm)"/>
+  <polygon points="541,51 581,89 522,101" fill="#ff2020" opacity="0.05" filter="url(#blur-sm)"/>
+  <polygon points="494,118 491,58 545,83" fill="#ff2020" opacity="0.04" filter="url(#blur-sm)"/>
+  <polygon points="485,219 536,236 493,288" fill="#ff2020" opacity="0.04" filter="url(#blur-sm)"/>
+  <line x1="763" y1="546" x2="770" y2="718" stroke="#ff2020" stroke-width="1.5" opacity="0.05" filter="url(#blur-sm)"/>
+  <line x1="370" y1="248" x2="137" y2="357" stroke="#ff2020" stroke-width="1.5" opacity="0.05" filter="url(#blur-sm)"/>
+  <line x1="239" y1="573" x2="238" y2="360" stroke="#ff2020" stroke-width="1.5" opacity="0.05" filter="url(#blur-sm)"/>
+  <line x1="516" y1="278" x2="708" y2="239" stroke="#ff2020" stroke-width="1.5" opacity="0.05" filter="url(#blur-sm)"/>
+  <line x1="708" y1="142" x2="941" y2="123" stroke="#ff2020" stroke-width="1.5" opacity="0.05" filter="url(#blur-sm)"/>
+  <line x1="256" y1="134" x2="124" y2="357" stroke="#ff2020" stroke-width="1.5" opacity="0.05" filter="url(#blur-sm)"/>
+
+  <!-- Vignette overlay -->
+  <rect width="800" height="600" fill="url(#vignette)"/>
+</svg>
