@@ -290,6 +290,9 @@ def battle(player, boss, player_attacks):
     print()
     type_text(f"  ⚔️  {player.name}  VS  {boss.name} (Lv.{boss.level})  ⚔️", delay=0.04)
     print("=" * 50)
+    if boss.intro_quote:
+        print()
+        type_text(f'  "{boss.intro_quote}"', delay=0.03)
     time.sleep(0.5)
 
     turn = 1
@@ -349,6 +352,8 @@ def battle(player, boss, player_attacks):
     if player.is_alive():
         draw_victory()
         print(f"\n  {boss.name} has been defeated!")
+        if boss.defeat_quote:
+            type_text(f'  "{boss.defeat_quote}"', delay=0.03)
         player.wins += 1
         player.record_victory(boss.name)
 

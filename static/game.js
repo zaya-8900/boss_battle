@@ -124,6 +124,9 @@
                 var div = document.createElement("div");
                 div.className = "event event-victory";
                 var html = "<strong>* VICTORY! *</strong><br>";
+                if (vd.defeat_quote) {
+                    html += '<em>"' + vd.defeat_quote + '"</em><br><br>';
+                }
                 html += "+" + vd.xp_gained + " XP gained!";
                 if (vd.leveled_up) {
                     html += "<br>* LEVEL UP! Now Level " + vd.new_level + "! *";
