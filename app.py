@@ -21,6 +21,13 @@ app = Flask(__name__)
 app.secret_key = "boss-battle-web-secret-key-change-me"
 
 
+@app.context_processor
+def inject_theme():
+    """Make theme available in all templates."""
+    settings = session.get("settings", {})
+    return {"theme": settings.get("theme", "dark")}
+
+
 # ── Session Helpers ─────────────────────────────────────────
 
 
@@ -153,6 +160,7 @@ def battle_start():
 
     # Restore player stats for the new battle
     player.restore_for_battle()
+    _apply_difficulty(player, boss)
     player_to_session(player)
     boss_to_session(boss)
     session["turn"] = 1
@@ -753,6 +761,51 @@ def help_page():
     if not player:
         return redirect(url_for("index"))
     return render_template("help.html", player=player, attacks=PLAYER_ATTACKS)
+
+
+@app.route("/settings")
+def settings():
+    """Settings page."""
+    player = player_from_session()
+    if not player:
+        return redirect(url_for("index"))
+    current = session.get("settings", {"difficulty": "normal", "theme": "dark"})
+    return render_template("settings.html", player=player, settings=current)
+
+
+@app.route("/settings", methods=["POST"])
+def save_settings():
+    """Save settings to session."""
+    difficulty = request.form.get("difficulty", "normal")
+    theme = request.form.get("theme", "dark")
+    if difficulty not in ("easy", "normal", "hard"):
+        difficulty = "normal"
+    if theme not in ("dark", "light"):
+        theme = "dark"
+    session["settings"] = {"difficulty": difficulty, "theme": theme}
+    return redirect(url_for("index"))
+
+
+def _apply_difficulty(player, boss):
+    """Apply difficulty modifiers to player HP and boss damage."""
+    settings = session.get("settings", {})
+    difficulty = settings.get("difficulty", "normal")
+    if difficulty == "easy":
+        # Player gets +25% HP
+        bonus = int(player.max_hp * 0.25)
+        player.max_hp += bonus
+        player.hp += bonus
+        # Boss gets -25% on all attack power (stored in session)
+        for atk in boss.attacks:
+            atk.power = max(1, int(atk.power * 0.75))
+    elif difficulty == "hard":
+        # Player gets -25% HP
+        penalty = int(player.max_hp * 0.25)
+        player.max_hp = max(1, player.max_hp - penalty)
+        player.hp = min(player.hp, player.max_hp)
+        # Boss gets +25% on all attack power
+        for atk in boss.attacks:
+            atk.power = int(atk.power * 1.25)
 
 
 @app.route("/logout", methods=["POST"])

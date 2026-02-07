@@ -6,7 +6,7 @@
     <title>{% block title %}Boss Battle Simulator{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
+<body class="{% if theme == 'light' %}light-theme{% endif %}">
     <header>
         <div class="header-content">
             <a href="{{ url_for('index') }}" class="logo">Boss Battle Simulator: Life Edition</a>

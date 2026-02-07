@@ -631,6 +631,75 @@ main {
 .event-effect_expire { color: var(--text-dim); font-style: italic; }
 .event-stun_skip { color: #ffeb3b; font-weight: bold; }
 
+/* ── Settings Form ───────────────────────── */
+.settings-form {
+    text-align: left;
+    margin: 24px 0;
+}
+
+.settings-group {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.settings-group legend {
+    color: var(--accent);
+    font-weight: bold;
+    padding: 0 8px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.radio-option:hover {
+    background: var(--bg-panel);
+}
+
+.radio-option input[type="radio"] {
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+}
+
+.radio-label {
+    font-weight: bold;
+    min-width: 70px;
+}
+
+.radio-desc {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}
+
+/* ── Light Theme ─────────────────────────── */
+body.light-theme {
+    --bg-primary: #f0f0f5;
+    --bg-secondary: #ffffff;
+    --bg-panel: #f5f5fa;
+    --border: #d0d0e0;
+    --text: #1a1a2e;
+    --text-dim: #666;
+    --accent: #5046e5;
+    --accent-hover: #6358ff;
+}
+
+body.light-theme .boss-art {
+    color: var(--accent);
+}
+
+body.light-theme .title-art {
+    color: var(--accent);
+}
+
 /* ── Responsive ──────────────────────────── */
 @media (max-width: 768px) {
     .battle-container {

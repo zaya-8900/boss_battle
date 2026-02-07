@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<div class="menu-box">
+    <h2>SETTINGS</h2>
+    <form action="{{ url_for('save_settings') }}" method="post" class="settings-form">
+        <fieldset class="settings-group">
+            <legend>Difficulty</legend>
+            <label class="radio-option">
+                <input type="radio" name="difficulty" value="easy"
+                       {% if settings.difficulty == 'easy' %}checked{% endif %}>
+                <span class="radio-label">Easy</span>
+                <span class="radio-desc">Player +25% HP, Boss -25% damage</span>
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="difficulty" value="normal"
+                       {% if settings.difficulty == 'normal' %}checked{% endif %}>
+                <span class="radio-label">Normal</span>
+                <span class="radio-desc">Standard difficulty</span>
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="difficulty" value="hard"
+                       {% if settings.difficulty == 'hard' %}checked{% endif %}>
+                <span class="radio-label">Hard</span>
+                <span class="radio-desc">Player -25% HP, Boss +25% damage</span>
+            </label>
+        </fieldset>
+
+        <fieldset class="settings-group">
+            <legend>Theme</legend>
+            <label class="radio-option">
+                <input type="radio" name="theme" value="dark"
+                       {% if settings.theme == 'dark' %}checked{% endif %}>
+                <span class="radio-label">Dark</span>
+                <span class="radio-desc">Default dark theme</span>
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="theme" value="light"
+                       {% if settings.theme == 'light' %}checked{% endif %}>
+                <span class="radio-label">Light</span>
+                <span class="radio-desc">Light background theme</span>
+            </label>
+        </fieldset>
+
+        <button type="submit" class="start-btn">Save Settings</button>
+    </form>
+    <a href="{{ url_for('index') }}" class="menu-btn back-btn">Back to Menu</a>
+</div>
+{% endblock %}
