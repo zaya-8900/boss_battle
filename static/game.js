@@ -80,6 +80,22 @@
         if (data.survival_mode && data.survival_wave && waveBadge) {
             waveBadge.textContent = "WAVE " + data.survival_wave;
         }
+
+        // Update status effect badges
+        updateEffectBadges("player-effects", data.player_effects || []);
+        updateEffectBadges("boss-effects", data.boss_effects || []);
+    }
+
+    function updateEffectBadges(containerId, effects) {
+        var container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+        effects.forEach(function (e) {
+            var span = document.createElement("span");
+            span.className = "effect-badge effect-" + e.name;
+            span.textContent = e.name.toUpperCase() + "(" + e.turns_left + ")";
+            container.appendChild(span);
+        });
     }
 
     function animateBar(fillId, textId, current, max) {

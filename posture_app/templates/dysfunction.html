@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}{{ d.name }} — Posture Library{% endblock %}
+{% block content %}
+
+<a href="{{ url_for('home') }}" class="back-link">&larr; All Dysfunctions</a>
+
+{# Section A: Overview #}
+<section class="detail-section overview-section">
+    <span class="category-badge">{{ category_labels.get(d.category, d.category) }}</span>
+    <h1 class="detail-title">{{ d.name }}</h1>
+    <p class="detail-description">{{ d.description }}</p>
+</section>
+
+{# Section B: How It Forms #}
+<section class="detail-section">
+    <h2 class="section-heading">How It Forms</h2>
+    <ul class="cause-list">
+        {% for cause in d.how_it_forms %}
+        <li>{{ cause }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+{# Section C: Biomechanics #}
+<section class="detail-section">
+    <h2 class="section-heading">What's Happening Biomechanically</h2>
+    <p class="bio-explanation">{{ d.biomechanics_explanation }}</p>
+
+    <div class="muscle-columns">
+        <div class="muscle-col tight">
+            <h3>Tight / Overactive Muscles</h3>
+            <ul>
+                {% for m in d.tight_muscles %}
+                <li>{{ m }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="muscle-col weak">
+            <h3>Weak / Inhibited Muscles</h3>
+            <ul>
+                {% for m in d.weak_muscles %}
+                <li>{{ m }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+{# Section D: Side Effects #}
+<section class="detail-section">
+    <h2 class="section-heading">Side Effects</h2>
+    <div class="effects-columns">
+        <div class="effects-col short-term">
+            <h3>Short-Term</h3>
+            <ul>
+                {% for e in d.side_effects.short_term %}
+                <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="effects-col long-term">
+            <h3>Long-Term</h3>
+            <ul>
+                {% for e in d.side_effects.long_term %}
+                <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+{# Section E: Why Fix #}
+<section class="detail-section why-fix-section">
+    <h2 class="section-heading">Why You Need to Fix This</h2>
+    <p>{{ d.why_fix }}</p>
+</section>
+
+{# Section F: Chain Reaction #}
+<section class="detail-section">
+    <h2 class="section-heading">Chain Reaction</h2>
+    <div class="chain-flow">
+        <p>{{ d.chain_reaction }}</p>
+    </div>
+
+    {% if connected %}
+    <div class="related-block">
+        <h3>This issue often leads to:</h3>
+        <div class="related-cards">
+            {% for c in connected %}
+            <a href="{{ url_for('dysfunction_detail', dysfunction_id=c.id) }}" class="related-card">
+                <span class="related-name">{{ c.name }}</span>
+                <span class="related-arrow">&rarr;</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if caused_by %}
+    <div class="related-block">
+        <h3>This issue is often caused by:</h3>
+        <div class="related-cards">
+            {% for c in caused_by %}
+            <a href="{{ url_for('dysfunction_detail', dysfunction_id=c.id) }}" class="related-card caused-by">
+                <span class="related-name">{{ c.name }}</span>
+                <span class="related-arrow">&rarr;</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+{# Section G: Severity Check #}
+<section class="detail-section">
+    <h2 class="section-heading">Severity Check</h2>
+    <div class="severity-grid">
+        <div class="severity-card mild">
+            <h3>Mild</h3>
+            <p>{{ d.severity_indicators.mild }}</p>
+        </div>
+        <div class="severity-card moderate">
+            <h3>Moderate</h3>
+            <p>{{ d.severity_indicators.moderate }}</p>
+        </div>
+        <div class="severity-card severe">
+            <h3>Severe</h3>
+            <p>{{ d.severity_indicators.severe }}</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

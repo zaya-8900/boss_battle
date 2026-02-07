@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#101018"/>
+      <stop offset="100%" stop-color="#06060c"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
+      <stop offset="20%" stop-color="black" stop-opacity="0"/>
+      <stop offset="100%" stop-color="black" stop-opacity="0.91"/>
+    </radialGradient>
+    <filter id="blur-sm"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blur-md"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="blur-lg"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Scene elements -->
+  <polygon points="380,0 420,0 580,600 220,600" fill="#4040cc" opacity="0.04"/>
+  <polygon points="390,0 410,0 500,600 300,600" fill="#7070ff" opacity="0.03"/>
+  <line x1="100" y1="380" x2="700" y2="380" stroke="#3030aa" stroke-width="2" opacity="0.08"/>
+  <circle cx="223" cy="204" r="41" fill="#3030aa" opacity="0.03" filter="url(#blur-lg)"/>
+  <circle cx="707" cy="308" r="51" fill="#3030aa" opacity="0.03" filter="url(#blur-lg)"/>
+  <circle cx="203" cy="458" r="81" fill="#3030aa" opacity="0.03" filter="url(#blur-lg)"/>
+  <circle cx="433" cy="485" r="96" fill="#3030aa" opacity="0.03" filter="url(#blur-lg)"/>
+  <circle cx="161" cy="198" r="57" fill="#3030aa" opacity="0.03" filter="url(#blur-lg)"/>
+
+  <!-- Vignette overlay -->
+  <rect width="800" height="600" fill="url(#vignette)"/>
+</svg>

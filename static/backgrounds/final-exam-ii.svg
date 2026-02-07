@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#340505"/>
+      <stop offset="100%" stop-color="#1a0202"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
+      <stop offset="23%" stop-color="black" stop-opacity="0"/>
+      <stop offset="100%" stop-color="black" stop-opacity="0.87"/>
+    </radialGradient>
+    <filter id="blur-sm"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="blur-md"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="blur-lg"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Scene elements -->
+  <path d="M75,620 Q122,259 169,620" fill="#c02020" opacity="0.08" filter="url(#blur-md)"/>
+  <path d="M470,620 Q506,250 542,620" fill="#c02020" opacity="0.08" filter="url(#blur-md)"/>
+  <path d="M572,620 Q623,148 674,620" fill="#c02020" opacity="0.04" filter="url(#blur-md)"/>
+  <path d="M561,620 Q585,165 609,620" fill="#c02020" opacity="0.07" filter="url(#blur-md)"/>
+  <path d="M172,620 Q221,308 270,620" fill="#c02020" opacity="0.06" filter="url(#blur-md)"/>
+  <path d="M54,620 Q81,370 108,620" fill="#c02020" opacity="0.07" filter="url(#blur-md)"/>
+  <path d="M167,620 Q188,289 209,620" fill="#c02020" opacity="0.07" filter="url(#blur-md)"/>
+  <path d="M212,620 Q261,456 310,620" fill="#c02020" opacity="0.08" filter="url(#blur-md)"/>
+  <path d="M220,620 Q260,442 300,620" fill="#c02020" opacity="0.06" filter="url(#blur-md)"/>
+  <path d="M325,620 Q363,203 401,620" fill="#c02020" opacity="0.03" filter="url(#blur-md)"/>
+  <path d="M336,620 Q378,441 420,620" fill="#c02020" opacity="0.07" filter="url(#blur-md)"/>
+  <path d="M426,620 Q465,139 504,620" fill="#c02020" opacity="0.03" filter="url(#blur-md)"/>
+  <path d="M270,620 Q329,108 388,620" fill="#c02020" opacity="0.04" filter="url(#blur-md)"/>
+  <path d="M489,620 Q535,409 581,620" fill="#c02020" opacity="0.03" filter="url(#blur-md)"/>
+  <path d="M431,620 Q457,387 483,620" fill="#c02020" opacity="0.07" filter="url(#blur-md)"/>
+  <ellipse cx="400" cy="350" rx="250" ry="200" fill="#ff3030" opacity="0.05" filter="url(#blur-lg)"/>
+
+  <!-- Vignette overlay -->
+  <rect width="800" height="600" fill="url(#vignette)"/>
+</svg>

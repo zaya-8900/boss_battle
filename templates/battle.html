@@ -15,6 +15,11 @@
     <div class="panel boss-panel">
         <h2>{{ boss.name }} <span class="level">Lv.{{ boss.level }}</span></h2>
         <pre class="boss-art">{{ boss_art }}</pre>
+        <div class="status-effects" id="boss-effects">
+            {% for e in boss_effects %}
+            <span class="effect-badge effect-{{ e.name }}">{{ e.name|upper }}({{ e.turns_left }})</span>
+            {% endfor %}
+        </div>
         <div class="stat-bar">
             <label>HP</label>
             <div class="bar-container hp-bar">
@@ -28,6 +33,11 @@
     <!-- Right Panel: Player -->
     <div class="panel player-panel">
         <h2>{{ player.name }} <span class="level">Lv.{{ player.level }}</span></h2>
+        <div class="status-effects" id="player-effects">
+            {% for e in player_effects %}
+            <span class="effect-badge effect-{{ e.name }}">{{ e.name|upper }}({{ e.turns_left }})</span>
+            {% endfor %}
+        </div>
 
         <div class="player-stats">
             <div class="stat-bar">

@@ -1,0 +1,572 @@
+/* ── Reset & Base ── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0e1117;
+    --bg-card: #161b22;
+    --bg-card-hover: #1c2333;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-dim: #1f6feb;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --orange: #db6d28;
+    --red: #f85149;
+    --tight-color: #f0883e;
+    --weak-color: #58a6ff;
+    --radius: 8px;
+    --radius-lg: 12px;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Navbar ── */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 2rem;
+    background: #010409;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.nav-brand:hover {
+    color: var(--accent);
+}
+
+.nav-tagline {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* ── Container ── */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    flex: 1;
+}
+
+/* ── Hero ── */
+.hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
+}
+
+.hero-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ── Category Sections ── */
+.category-section {
+    margin-bottom: 2.5rem;
+}
+
+.category-heading {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ── Card Grid ── */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    position: relative;
+}
+
+.card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.severity-dots {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    padding-top: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot-mild { background: var(--green); }
+.dot-moderate { background: var(--yellow); }
+.dot-severe { background: var(--red); }
+
+.card-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.card-arrow {
+    color: var(--accent);
+    font-size: 1.1rem;
+    align-self: flex-end;
+}
+
+/* ── Detail Page ── */
+.back-link {
+    display: inline-block;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.detail-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.25rem;
+}
+
+.overview-section {
+    border-left: 4px solid var(--accent);
+}
+
+.category-badge {
+    display: inline-block;
+    background: var(--accent-dim);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+}
+
+.detail-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.detail-description {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.section-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+/* ── How It Forms ── */
+.cause-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.cause-list li {
+    padding-left: 1.25rem;
+    position: relative;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.cause-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+/* ── Biomechanics ── */
+.bio-explanation {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+}
+
+.muscle-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.muscle-col {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+}
+
+.muscle-col h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.muscle-col.tight h3 { color: var(--tight-color); }
+.muscle-col.weak h3 { color: var(--weak-color); }
+
+.muscle-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.muscle-col.tight li {
+    color: var(--tight-color);
+    padding-left: 1rem;
+    position: relative;
+}
+
+.muscle-col.tight li::before {
+    content: "\25B6";
+    position: absolute;
+    left: 0;
+    font-size: 0.5rem;
+    top: 0.45em;
+    color: var(--tight-color);
+}
+
+.muscle-col.weak li {
+    color: var(--weak-color);
+    padding-left: 1rem;
+    position: relative;
+}
+
+.muscle-col.weak li::before {
+    content: "\25B6";
+    position: absolute;
+    left: 0;
+    font-size: 0.5rem;
+    top: 0.45em;
+    color: var(--weak-color);
+}
+
+/* ── Side Effects ── */
+.effects-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.effects-col {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+}
+
+.effects-col h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.effects-col.short-term h3 { color: var(--yellow); }
+.effects-col.long-term h3 { color: var(--red); }
+
+.effects-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.effects-col.short-term li {
+    color: var(--yellow);
+    padding-left: 1rem;
+    position: relative;
+}
+
+.effects-col.short-term li::before {
+    content: "\26A0";
+    position: absolute;
+    left: 0;
+    font-size: 0.65rem;
+    top: 0.3em;
+}
+
+.effects-col.long-term li {
+    color: var(--red);
+    padding-left: 1rem;
+    position: relative;
+}
+
+.effects-col.long-term li::before {
+    content: "\2716";
+    position: absolute;
+    left: 0;
+    font-size: 0.6rem;
+    top: 0.4em;
+}
+
+/* ── Why Fix ── */
+.why-fix-section {
+    border-left: 4px solid var(--orange);
+}
+
+.why-fix-section p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 1.02rem;
+}
+
+/* ── Chain Reaction ── */
+.chain-flow {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    border-left: 3px solid var(--accent-dim);
+}
+
+.related-block {
+    margin-top: 1.25rem;
+}
+
+.related-block h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+}
+
+.related-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.related-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(88, 166, 255, 0.1);
+    border: 1px solid var(--accent-dim);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.related-card:hover {
+    background: rgba(88, 166, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.related-card.caused-by {
+    background: rgba(210, 153, 34, 0.1);
+    border-color: var(--yellow);
+    color: var(--yellow);
+}
+
+.related-card.caused-by:hover {
+    background: rgba(210, 153, 34, 0.2);
+}
+
+.related-arrow {
+    font-size: 0.8rem;
+}
+
+/* ── Severity Check ── */
+.severity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.severity-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    border-top: 3px solid transparent;
+}
+
+.severity-card h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.severity-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.severity-card.mild {
+    border-top-color: var(--green);
+}
+.severity-card.mild h3 { color: var(--green); }
+
+.severity-card.moderate {
+    border-top-color: var(--yellow);
+}
+.severity-card.moderate h3 { color: var(--yellow); }
+
+.severity-card.severe {
+    border-top-color: var(--red);
+}
+.severity-card.severe h3 { color: var(--red); }
+
+/* ── Footer ── */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .container {
+        padding: 1.25rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-section {
+        padding: 1.25rem 1rem;
+    }
+
+    .detail-title {
+        font-size: 1.35rem;
+    }
+
+    .muscle-columns,
+    .effects-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .severity-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.25rem;
+    }
+
+    .hero-sub {
+        font-size: 0.9rem;
+    }
+
+    .detail-title {
+        font-size: 1.2rem;
+    }
+}
